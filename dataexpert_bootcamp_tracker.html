@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DataExpert.io Community Bootcamp Tracker</title>
+<style>
+  :root{--bg:#f7f8fb;--card:#fff;--text:#172033;--muted:#667085;--line:#d9dee8;--accent:#2854d8;--accent2:#eef3ff;--ok:#15803d;--warn:#b45309;--danger:#b42318;--shadow:0 10px 25px rgba(16,24,40,.08)}
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  header{position:sticky;top:0;z-index:5;background:rgba(247,248,251,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .wrap{max-width:1280px;margin:0 auto;padding:22px} h1{margin:0 0 8px;font-size:clamp(1.45rem,3vw,2.3rem)} h2{margin:0 0 14px;font-size:1.35rem} h3{margin:0 0 10px;font-size:1.05rem}.muted{color:var(--muted)}
+  .topline{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:var(--accent2);color:#173b91;font-weight:650;font-size:.88rem}
+  nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.tab{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:700}.tab.active{background:var(--accent);border-color:var(--accent);color:white}
+  main{max-width:1280px;margin:0 auto;padding:22px}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+  .span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-6{grid-column:span 6}.span-4{grid-column:span 4}.span-3{grid-column:span 3}@media(max-width:900px){.span-8,.span-6,.span-4,.span-3{grid-column:span 12}.wrap,main{padding:14px}.hide-mobile{display:none}}
+  .kpi{font-size:1.8rem;font-weight:800;margin:4px 0}.bar{height:14px;background:#e9edf5;border-radius:999px;overflow:hidden}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#2854d8,#16a34a);transition:width .25s}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:.92rem} th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top} th{text-align:left;background:#f3f5f9;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:#475467} tr:hover td{background:#fbfcff}
+  input[type="checkbox"]{width:19px;height:19px;accent-color:var(--accent)} input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#fff;color:var(--text)} textarea{width:100%;min-height:58px;resize:vertical}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn{border:0;border-radius:12px;padding:10px 13px;background:var(--accent);color:#fff;font-weight:800;cursor:pointer}.btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}.btn.danger{background:var(--danger)}
+  .module-title{font-weight:800}.tag{display:inline-block;font-size:.76rem;border:1px solid var(--line);border-radius:999px;padding:3px 8px;margin:2px;background:#fff}.lesson-done{text-decoration:line-through;color:var(--muted)}.small{font-size:.82rem}.right{text-align:right}.resource a{font-weight:700;color:var(--accent);text-decoration:none}.resource a:hover{text-decoration:underline}.footer{padding:22px;color:var(--muted);font-size:.82rem}.warning{color:var(--warn);font-weight:700}.ok{color:var(--ok);font-weight:800}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="topline">
+      <div>
+        <h1>DataExpert.io Community Bootcamp Tracker</h1>
+        <div class="muted">Offline checklist, schedule planner, programme structure, and curated learning resources.</div>
+      </div>
+      <span class="pill">Default target: finish before 30 Jun 2026</span>
+    </div>
+    <nav>
+      <button class="tab active" data-page="tracker">1. Completion tracker</button>
+      <button class="tab" data-page="structure">2. Programme structure</button>
+      <button class="tab" data-page="resources">3. Best resources</button>
+    </nav>
+  </div>
+</header>
+<main>
+<section id="tracker" class="page active">
+  <div class="grid">
+    <div class="card span-12 controls">
+      <label>Target deadline <input id="deadline" type="date" value="2026-06-30"></label>
+      <label>Study days / week <input id="daysPerWeek" type="number" min="1" max="7" value="5" style="width:80px"></label>
+      <label>Homework buffer / module <input id="homeworkHours" type="number" min="0" step="0.5" value="2" style="width:90px"> h</label>
+      <button class="btn secondary" id="exportBtn">Export progress JSON</button>
+      <button class="btn secondary" id="importBtn">Import progress JSON</button>
+      <button class="btn danger" id="resetBtn">Reset</button>
+      <input id="fileInput" type="file" accept="application/json,.json" hidden>
+      <span id="jsonStatus" class="muted small" role="status" aria-live="polite"></span>
+    </div>
+    <div class="card span-3"><h3>Lessons complete</h3><div class="kpi" id="lessonKpi">0 / 0</div><div class="bar"><div id="lessonBar"></div></div></div>
+    <div class="card span-3"><h3>Assignments complete</h3><div class="kpi" id="assignKpi">0 / 0</div><div class="bar"><div id="assignBar"></div></div></div>
+    <div class="card span-3"><h3>Total workload</h3><div class="kpi" id="workloadKpi">0h</div><div class="muted small">Video time + homework buffer</div></div>
+    <div class="card span-3"><h3>Pace needed</h3><div class="kpi" id="paceKpi">—</div><div class="muted small" id="paceSub">Based on your deadline</div></div>
+    <div class="card span-12"><h2>Module checklist</h2><div class="muted" style="margin-bottom:10px">Tick lessons and assignments as you finish them. Notes are saved locally in this browser.</div><div style="overflow:auto"><table id="trackerTable"></table></div></div>
+  </div>
+</section>
+<section id="structure" class="page">
+  <div class="card"><h2>Detailed programme structure and estimated dedication</h2><p class="muted">Lesson durations are from the public bootcamp overview. Estimated dedication adds review/lab practice and a configurable homework buffer.</p><div style="overflow:auto"><table id="structureTable"></table></div></div>
+</section>
+<section id="resources" class="page">
+  <div class="card"><h2>Curated resources by module</h2><p class="muted">I prioritised official documentation, canonical guides, and strong hands-on tutorials. Use these as backups or deeper learning material alongside the bootcamp lessons.</p><div style="overflow:auto"><table id="resourcesTable"></table></div></div>
+</section>
+<div class="footer">Progress is stored in your browser localStorage only. Keep an exported JSON backup if you use different devices.</div>
+</main>
+<script>
+const modules = [
+{n:1,title:'Bootcamp Orientation',lessons:[['Bootcamp Kickoff',20],['Boot Camp Database Setup',20]],assignment:null,resource:['PostgreSQL Docker Quickstart','https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/','Best for quickly understanding the local database setup and Dockerised Postgres workflow.']},
+{n:2,title:'Dimensional Data Modeling',lessons:[['Complex Data Type and Cumulation Day 1 Lecture',43],['Complex Data Type and Cumulation Day 1 Lab',41],['Building Slowly Changing Dimensions Day 2 Lecture',40],['Building Slowly Changing Dimensions Day 2 Lab',45],['Graph Data Modeling Day 3 Lecture',34],['Graph Data Modeling Day 3 Lab',46]],assignment:'Dimensional Data Modeling Homework',resource:['Kimball dimensional modelling techniques','https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/','Canonical reference for dimensions, facts, grain, slowly changing dimensions, and dimensional warehouse thinking.']},
+{n:3,title:'Fact Data Modeling',lessons:[['Core Concepts, Deduplication Day 1 Lecture',52],['Practical Insights into Data Modeling Day 1 Lab',40],['Core Elements in Data Modeling Day 2 Lecture',31],['Compact Tables for Efficient Data Representation Day 2 Lab',45],['Minimizing Shuffle and Reducing Facts Day 3 Lecture',32],['Formatting and Aggregating Data Day 3 Lab',30]],assignment:'Fact Data Modeling Assignment',resource:['Kimball fact table techniques','https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/fact-table-structure/','Strong companion for transaction facts, accumulating snapshots, periodic snapshots, grain, and aggregation design.']},
+{n:4,title:'Apache Spark Fundamentals',lessons:[['Architecture, Optimization, and Best Practices Day 1 Lecture',48],['Broadcast and Hash Joins Day 1 Lab',26],['Managing Spark Jobs and Notebooks Day 2 Lecture',34],['User-Defined Functions and Broadcast Join Day 2 Lab',36],['Unit Testing Spark Jobs Lecture',41],['Spark and PySpark Testing Lab',27]],assignment:'Apache Spark Homework',resource:['Apache Spark PySpark user guide + testing','https://spark.apache.org/docs/latest/api/python/user_guide/index.html','Official PySpark docs. Pair it with the PySpark testing guide for unit-testing Spark jobs.']},
+{n:5,title:'Applying Analytical Patterns',lessons:[['SQL, Scaling Projects and Aggregation Analysis Day 1 Lecture',52],['Growth Accounting and Retention Analysis Day 1 Lab',34],['Recursive CTEs and Window Functions Day 2 Lecture',44],['Aggregations and Cardinality Reduction Day 2 Lab',33]],assignment:'Analytical Patterns Homework',resource:['Mode SQL tutorial: window functions','https://mode.com/sql-tutorial/sql-window-functions/','Practical, readable SQL analytics guide for window functions, retention-style analysis, and analytical query patterns.']},
+{n:6,title:'Real-time pipelines with Flink and Kafka',lessons:[['Flink Lab Setup',7],['Streaming and Real-time Pipelines Day 1 Lecture',50],['Setting up Streaming Pipelines Day 1 Lab',40],['Data Collection and Processing Day 2 Lecture',31],['Kafka, Postgres, Spark Integrations and Parallelism Day 2 Lab',39]],assignment:'Flink Homework',resource:['Apache Flink docs: DataStream + Kafka connector','https://nightlies.apache.org/flink/flink-docs-stable/','Official Flink documentation for stateful stream processing. Use the Kafka connector section for source/sink integration.']},
+{n:7,title:'Data Visualization and Impact',lessons:[['Mastering Data Engineering Day 1 Lecture',39],['Hands-On with the CSV files Day 1 Lab',8],['Insights and Best Practices Day 2 Lecture',23],['Data Visualization and Aggregation Techniques Day 2 Lab',37]],assignment:'Data Visualization Submission',resource:['Tableau data visualisation best practices','https://www.tableau.com/learn/articles/data-visualization','Accessible guide to chart selection, visual storytelling, and communicating insight clearly.']},
+{n:8,title:'Data Pipeline Maintenance',lessons:[['Navigating the Complexities of Data Engineering Day 1 Lecture',67],['Strategies for Maintenance and Dock Building Day 2 Lecture',77]],assignment:'Data Pipeline Maintenance Homework',resource:['dbt best practices','https://docs.getdbt.com/best-practices','Practical reference for maintainable analytics engineering: modularity, testing, documentation, and production hygiene.']},
+{n:9,title:'KPIs and Experimentation',lessons:[['Metrics, Growth Strategies and Collaborative Approaches Day 1 Lecture',55],['Setting up and Analysing Experiments Day 1 Lab',36],['Leading and Lagging Metrics Day 2 Lecture',65]],assignment:'KPIs and Experimentation Homework',resource:['Trustworthy Online Controlled Experiments','https://www.exp-platform.com/','Companion site for a leading experimentation book; useful for A/B testing, metrics, guardrails, and experiment design.']},
+{n:10,title:'Data Quality Patterns',lessons:[['MIDAS Process from Airbnb Day 1 Lecture',45],['Spec-Building Document Day 1 Lab',33],['WAP Patterns Day 2 Lecture',27]],assignment:null,resource:['Write-Audit-Publish pattern with Apache Iceberg','https://aws.amazon.com/blogs/big-data/build-write-audit-publish-pattern-with-apache-iceberg-branching-and-aws-glue-data-quality/','Hands-on explanation of WAP-style quality gates using Iceberg branching and data quality checks.']}
+];
+const key='de_bootcamp_tracker_v1';
+const state=JSON.parse(localStorage.getItem(key)||'{}');
+function save(){localStorage.setItem(key,JSON.stringify(state));render();}
+function mins(m){return m.lessons.reduce((a,b)=>a+b[1],0)}
+function h(m){return (mins(m)/60).toFixed(1)}
+function id(m,i){return `m${m.n}_l${i}`}
+function aid(m){return `m${m.n}_a`}
+function noteid(m){return `m${m.n}_note`}
+function lessonCount(){return modules.reduce((a,m)=>a+m.lessons.length,0)}
+function assignmentCount(){return modules.filter(m=>m.assignment).length}
+function render(){
+ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.page').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.page).classList.add('active')});
+ const hw=parseFloat(document.getElementById('homeworkHours').value||2); const days=parseFloat(document.getElementById('daysPerWeek').value||5);
+ const doneLessons=modules.reduce((a,m)=>a+m.lessons.filter((_,i)=>state[id(m,i)]).length,0); const totalLessons=lessonCount();
+ const doneAssign=modules.reduce((a,m)=>a+(m.assignment&&state[aid(m)]?1:0),0); const totalAssign=assignmentCount();
+ const videoHours=modules.reduce((a,m)=>a+mins(m)/60,0); const workload=videoHours + totalAssign*hw; const remaining=videoHours*(1-doneLessons/totalLessons)+(totalAssign-doneAssign)*hw;
+ const deadline=new Date(document.getElementById('deadline').value+'T23:59:59'); const now=new Date(); const weeks=Math.max((deadline-now)/(1000*60*60*24*7),0.01); const perWeek=remaining/weeks; const perDay=perWeek/days;
+ document.getElementById('lessonKpi').textContent=`${doneLessons} / ${totalLessons}`; document.getElementById('lessonBar').style.width=(doneLessons/totalLessons*100)+'%';
+ document.getElementById('assignKpi').textContent=`${doneAssign} / ${totalAssign}`; document.getElementById('assignBar').style.width=(doneAssign/totalAssign*100)+'%';
+ document.getElementById('workloadKpi').textContent=`${workload.toFixed(1)}h`; document.getElementById('paceKpi').textContent=`${perWeek.toFixed(1)}h/wk`; document.getElementById('paceSub').textContent=`≈ ${perDay.toFixed(1)}h per study day · ${remaining.toFixed(1)}h remaining`;
+ document.getElementById('trackerTable').innerHTML='<tr><th>Done</th><th>Module / item</th><th class="right">Time</th><th>Assignment</th><th>Notes</th></tr>'+modules.map(m=>{
+   const lessonRows=m.lessons.map((l,i)=>`<label><input type="checkbox" ${state[id(m,i)]?'checked':''} onchange="state['${id(m,i)}']=this.checked;save()"> <span class="${state[id(m,i)]?'lesson-done':''}">${l[0]}</span> <span class="tag">${l[1]}m</span></label>`).join('<br>');
+   return `<tr><td>${Math.round(m.lessons.filter((_,i)=>state[id(m,i)]).length/m.lessons.length*100)}%</td><td><div class="module-title">${m.n}. ${m.title}</div><div class="small">${lessonRows}</div></td><td class="right">${h(m)}h</td><td>${m.assignment?`<label><input type="checkbox" ${state[aid(m)]?'checked':''} onchange="state['${aid(m)}']=this.checked;save()"> ${m.assignment}</label>`:'<span class="muted">No assignment listed</span>'}</td><td><textarea placeholder="Notes / blockers / links" oninput="state['${noteid(m)}']=this.value;localStorage.setItem(key,JSON.stringify(state))">${state[noteid(m)]||''}</textarea></td></tr>`}).join('');
+ document.getElementById('structureTable').innerHTML='<tr><th>#</th><th>Block</th><th>Lessons</th><th>Video time</th><th>Assignment</th><th>Suggested total dedication</th></tr>'+modules.map(m=>`<tr><td>${m.n}</td><td><b>${m.title}</b></td><td>${m.lessons.map(l=>`<span class="tag">${l[0]} · ${l[1]}m</span>`).join(' ')}</td><td>${h(m)}h</td><td>${m.assignment||'—'}</td><td><b>${(mins(m)/60+(m.assignment?hw:0)+Math.max(0.5,mins(m)/180)).toFixed(1)}h</b><br><span class="muted small">Video + ${m.assignment?hw+'h homework + ':''}review/practice</span></td></tr>`).join('');
+ document.getElementById('resourcesTable').innerHTML='<tr><th>Block</th><th>Best resource</th><th>Why / how to use it</th><th>Suggested use</th></tr>'+modules.map(m=>`<tr class="resource"><td><b>${m.n}. ${m.title}</b></td><td><a href="${m.resource[1]}" target="_blank" rel="noopener">${m.resource[0]}</a></td><td>${m.resource[2]}</td><td>Use before the lesson for context, then after the lab to close gaps and write notes.</td></tr>`).join('');
+}
+document.getElementById('deadline').onchange=render; document.getElementById('daysPerWeek').oninput=render; document.getElementById('homeworkHours').oninput=render;
+document.getElementById('resetBtn').onclick=()=>{if(confirm('Reset all saved progress?')){localStorage.removeItem(key);location.reload();}};
+function setJsonStatus(message, ok=true){
+ const el=document.getElementById('jsonStatus');
+ el.textContent=message;
+ el.className=ok?'small ok':'small warning';
+}
+function currentSettings(){
+ return {
+   deadline: document.getElementById('deadline').value,
+   daysPerWeek: document.getElementById('daysPerWeek').value,
+   homeworkHours: document.getElementById('homeworkHours').value
+ };
+}
+function applySettings(settings={}){
+ if(settings.deadline) document.getElementById('deadline').value=settings.deadline;
+ if(settings.daysPerWeek) document.getElementById('daysPerWeek').value=settings.daysPerWeek;
+ if(settings.homeworkHours) document.getElementById('homeworkHours').value=settings.homeworkHours;
+}
+document.getElementById('exportBtn').onclick=()=>{
+ const payload={
+   app:'dataexpert-community-bootcamp-tracker',
+   version:2,
+   exportedAt:new Date().toISOString(),
+   settings:currentSettings(),
+   state
+ };
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download=`dataexpert-bootcamp-progress-${new Date().toISOString().slice(0,10)}.json`;
+ document.body.appendChild(a);
+ a.click();
+ a.remove();
+ URL.revokeObjectURL(a.href);
+ setJsonStatus('Progress exported as JSON.');
+};
+document.getElementById('importBtn').onclick=()=>document.getElementById('fileInput').click();
+document.getElementById('fileInput').onchange=e=>{
+ const f=e.target.files[0];
+ if(!f)return;
+ const r=new FileReader();
+ r.onload=()=>{
+   try{
+     const parsed=JSON.parse(r.result);
+     const importedState=parsed.state && typeof parsed.state==='object' ? parsed.state : parsed;
+     if(!importedState || typeof importedState!=='object') throw new Error('Missing tracker state');
+     Object.keys(state).forEach(k=>delete state[k]);
+     Object.assign(state,importedState);
+     if(parsed.settings) applySettings(parsed.settings);
+     localStorage.setItem(key,JSON.stringify(state));
+     render();
+     setJsonStatus(`Imported ${f.name} successfully.`);
+   }catch(err){
+     setJsonStatus('Import failed: invalid JSON tracker file.', false);
+   }finally{
+     e.target.value='';
+   }
+ };
+ r.onerror=()=>setJsonStatus('Import failed: could not read the file.', false);
+ r.readAsText(f);
+};
+render();
+</script>
+</body>
+</html>
