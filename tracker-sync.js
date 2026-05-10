@@ -18,7 +18,7 @@
 (function () {
   'use strict';
 
-  const SYNC_API = 'https://html-trackers.diegogarciagarcia.workers.dev';
+  const SYNC_API = 'https://html-trackers.pages.dev/api';
   const TOKEN_KEY = '_sync_token';
   const SCRIPT_TAG = document.currentScript;
   const TRACKER_KEY = SCRIPT_TAG?.getAttribute('data-tracker-key');
