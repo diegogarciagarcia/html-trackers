@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AWS Certified Solutions Architect Associate – Study Tracker</title>
+<style>
+:root{
+  --bg:#f6f8fb; --card:#ffffff; --ink:#172033; --muted:#64748b; --line:#dbe3ef;
+  --blue:#2563eb; --blue2:#dbeafe; --green:#16a34a; --green2:#dcfce7; --amber:#d97706; --amber2:#fef3c7;
+  --red:#dc2626; --red2:#fee2e2; --purple:#7c3aed; --purple2:#ede9fe; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:linear-gradient(135deg,#0f172a,#1e3a8a 60%,#d97706);color:white;padding:28px 18px 22px}
+.wrap{max-width:1220px;margin:auto}
+h1{margin:0 0 8px;font-size:clamp(1.6rem,3vw,2.7rem)}
+.subtitle{max-width:900px;color:#dbeafe;margin:0;font-size:1rem}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.pill{border-radius:999px;padding:7px 11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);font-size:.88rem}
+nav{position:sticky;top:0;z-index:9;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.tabs{max-width:1220px;margin:auto;display:flex;gap:8px;overflow-x:auto;padding:10px 12px}
+.tab{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:12px;padding:10px 12px;cursor:pointer;color:#334155;font-weight:650}
+.tab.active{background:var(--blue);color:white;border-color:var(--blue)}
+main{max-width:1220px;margin:22px auto;padding:0 14px}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
+.card h2,.card h3{margin-top:0}.muted{color:var(--muted)}
+.kpi{font-size:2rem;font-weight:800;margin:4px 0}.small{font-size:.88rem}.tag{display:inline-block;border-radius:999px;padding:4px 8px;font-size:.78rem;font-weight:700;margin:2px}
+.high{background:var(--red2);color:#991b1b}.medium{background:var(--amber2);color:#92400e}.low{background:var(--green2);color:#166534}.domain1{background:var(--blue2);color:#1e40af}.domain2{background:var(--purple2);color:#5b21b6}.domain3{background:var(--amber2);color:#92400e}.domain4{background:var(--green2);color:#166534}
+table{width:100%;border-collapse:separate;border-spacing:0;background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th,td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:#f1f5f9;color:#334155;font-size:.86rem}
+tr:last-child td{border-bottom:none}
+input[type="checkbox"]{transform:scale(1.15)}
+input[type="number"],input[type="text"],select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;color:var(--ink)}
+textarea{min-height:42px;resize:vertical}
+.progressbar{height:11px;background:#e2e8f0;border-radius:99px;overflow:hidden}.progressbar span{display:block;height:100%;background:linear-gradient(90deg,#d97706,#16a34a);width:0%}
+.callout{border-left:5px solid var(--blue);background:#eff6ff;padding:12px 14px;border-radius:12px;margin:12px 0}
+.warn{border-left-color:var(--amber);background:#fffbeb}.danger{border-left-color:var(--red);background:#fff1f2}.success{border-left-color:var(--green);background:#f0fdf4}
+.day-card{border:1px solid var(--line);border-radius:16px;background:white;padding:14px}
+.day-card h3{margin:0 0 8px}.day-card ul{padding-left:18px;margin:8px 0}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.btn{border:0;background:#0f172a;color:white;border-radius:11px;padding:9px 12px;cursor:pointer;font-weight:700}.btn.secondary{background:#e2e8f0;color:#0f172a}.btn.blue{background:var(--blue)}
+.cheat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cheat{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:13px}.cheat h4{margin:0 0 7px}
+.footer{font-size:.8rem;color:#64748b;margin:28px 0}
+@media(max-width:860px){.grid-2,.grid-3,.grid-4,.cheat-grid{grid-template-columns:1fr} th,td{font-size:.86rem;padding:8px}.tabs{padding:8px}.tab{padding:8px 10px}.card{padding:14px}}
+@media print{nav,.actions{display:none}body{background:white}.page{display:block}.card{box-shadow:none;break-inside:avoid}}
+.file-input{display:none}.status{margin-top:10px;font-size:13px;color:var(--muted)}
+.snapshot-row{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#fff}.snapshot-row code{font-size:.78rem;color:#475569}
+.back-nav { padding: 12px 22px; font-size: 14px; font-weight: 600; }
+.back-nav .back-link { color: #2563eb; text-decoration: none; }
+.back-nav .back-link:hover { text-decoration: underline; }
+@media print { .back-nav { display: none; } }
+</style>
+</head>
+<body>
+<nav class="back-nav" aria-label="Site navigation">
+  <a href="../index.html" class="back-link">← Back to Home</a>
+</nav>
+<header>
+  <div class="wrap">
+    <h1>AWS Certified Solutions Architect – Associate</h1>
+    <p class="subtitle">A single-page HTML study tracker aligned to the official AWS SAA-C03 exam guide and the Udemy "Ultimate AWS Certified Solutions Architect Associate SAA-C03" course by Stéphane Maarek.</p>
+    <div class="meta">
+      <span class="pill">Target: 21 days / 3 weeks</span>
+      <span class="pill">Exam: SAA-C03 · 130 min · 65 questions · $150 USD</span>
+      <span class="pill">Domains: 30% / 26% / 24% / 20%</span>
+      <span class="pill">Course: Ultimate AWS Certified SAA-C03 · Stéphane Maarek</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="tabs">
+    <button class="tab active" onclick="showPage('dashboard',this)">Dashboard</button>
+    <button class="tab" onclick="showPage('tracker',this)">Master Tracker</button>
+    <button class="tab" onclick="showPage('backup',this)">Backup / Profiles</button>
+    <button class="tab" onclick="showPage('schedule',this)">Weekly / Daily Schedule</button>
+    <button class="tab" onclick="showPage('mapping',this)">AWS ↔ Udemy Mapping</button>
+    <button class="tab" onclick="showPage('practice',this)">Practice & Error Log</button>
+    <button class="tab" onclick="showPage('cheat1',this)">Cheat Sheet D1</button>
+    <button class="tab" onclick="showPage('cheat2',this)">Cheat Sheet D2</button>
+    <button class="tab" onclick="showPage('cheat3',this)">Cheat Sheet D3</button>
+    <button class="tab" onclick="showPage('cheat4',this)">Cheat Sheet D4</button>
+  </div>
+</nav>
+
+<main>
+<section id="dashboard" class="page active">
+  <div class="grid grid-4">
+    <div class="card"><div class="muted">Total progress</div><div class="kpi" id="overallPct">0%</div><div class="progressbar"><span id="overallBar"></span></div></div>
+    <div class="card"><div class="muted">High priority done</div><div class="kpi" id="highDone">0/0</div><div class="small">IAM, VPC, EC2, S3, RDS/Aurora, DynamoDB, ELB/ASG, Route 53, CloudFront, Lambda, KMS.</div></div>
+    <div class="card"><div class="muted">Target readiness</div><div class="kpi" id="readyScore">Not ready</div><div class="small">Ready when 2 practice exams ≥80% and weak topics closed.</div></div>
+    <div class="card"><div class="muted">Next action</div><div class="kpi" style="font-size:1.05rem" id="nextAction">Start Day 1</div><div class="small">Auto-calculated from unchecked daily tasks.</div></div>
+  </div>
+  <div class="card">
+    <h2>Fastest realistic strategy</h2>
+    <div class="grid grid-3">
+      <div class="callout"><b>1. Scenario-based thinking.</b><br/>Every question is a scenario. Identify: requirements → constraints → best AWS service → why not the others.</div>
+      <div class="callout success"><b>2. Elimination is key.</b><br/>Most questions have 2 obviously wrong answers. Focus on eliminating, then choose the MOST correct remaining option.</div>
+      <div class="callout warn"><b>3. Error log is mandatory.</b><br/>Every wrong answer becomes a rule. Revisit the rule 24h later and during final review.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Exam focus by official weight</h2>
+    <table>
+      <tr><th>Domain</th><th>Weight</th><th>Fast-track implication</th></tr>
+      <tr><td><span class="tag domain1">D1</span> Design Secure Architectures</td><td><b>30%</b></td><td>IAM policies/roles, KMS encryption, VPC security, WAF/Shield, Cognito, SSO, cross-account access.</td></tr>
+      <tr><td><span class="tag domain2">D2</span> Design Resilient Architectures</td><td><b>26%</b></td><td>Multi-AZ, Auto Scaling, ELB, Route 53 failover, S3 replication, RDS failover, disaster recovery strategies.</td></tr>
+      <tr><td><span class="tag domain3">D3</span> Design High-Performing Architectures</td><td><b>24%</b></td><td>CloudFront, Global Accelerator, ElastiCache, DynamoDB, EBS/EFS, Lambda, ECS/EKS, performance optimization.</td></tr>
+      <tr><td><span class="tag domain4">D4</span> Design Cost-Optimized Architectures</td><td><b>20%</b></td><td>Reserved/Spot/Savings Plans, S3 storage tiers, right-sizing, Compute Optimizer, data transfer costs.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="tracker" class="page">
+  <div class="card">
+    <h2>Master Tracker</h2>
+    <p class="muted">Complete in priority order. "High" means exam-heavy or frequently tested; "Medium" means know service selection and key trade-offs; "Low" means skim unless practice exams expose weakness.</p>
+    <table id="masterTable">
+      <tr><th>Done</th><th>Priority</th><th>Exam domain</th><th>Udemy course block / lessons</th><th>What to know for the exam</th><th>Confidence</th><th>Notes</th></tr>
+    </table>
+  </div>
+</section>
+
+<section id="schedule" class="page">
+  <div class="card">
+    <h2>Weekly / Daily Schedule</h2>
+    <p class="muted">Aggressive 3-week plan. If a day is too heavy, move its review block to the weekend, but keep practice questions from Day 5 onwards.</p>
+    <div id="dailyGrid" class="grid grid-3"></div>
+  </div>
+</section>
+
+<section id="mapping" class="page">
+  <div class="card">
+    <h2>AWS exam guide ↔ Udemy course mapping</h2>
+    <p class="muted">Course: "Ultimate AWS Certified Solutions Architect Associate SAA-C03" by Stéphane Maarek.</p>
+    <table>
+      <tr><th>AWS domain / task</th><th>Udemy sections to complete</th><th>Fast-track treatment</th></tr>
+      <tr><td><b>D1.1 Secure access to AWS resources</b>: IAM policies, roles, cross-account, federation, SSO, Organizations.</td><td>IAM, AWS Organizations, SSO/Identity Center sections.</td><td><span class="tag high">Deep</span> Policy evaluation logic, trust policies, permission boundaries.</td></tr>
+      <tr><td><b>D1.2 Secure workloads and applications</b>: KMS, encryption at rest/transit, Secrets Manager, ACM.</td><td>KMS, Encryption, Security sections.</td><td><span class="tag high">Deep</span> CMK types, envelope encryption, key policies, SSE options.</td></tr>
+      <tr><td><b>D1.3 Network security</b>: VPC, security groups, NACLs, WAF, Shield, VPC endpoints.</td><td>VPC, Security Groups, WAF & Shield sections.</td><td><span class="tag high">Deep</span> SG vs NACL, VPC endpoints (gateway vs interface), WAF rules.</td></tr>
+      <tr><td><b>D2.1 Scalable and loosely coupled architectures</b>: ELB, ASG, SQS, SNS, EventBridge.</td><td>ELB, ASG, SQS, SNS, EventBridge sections.</td><td><span class="tag high">Deep</span> ALB vs NLB, scaling policies, decoupling patterns, fan-out.</td></tr>
+      <tr><td><b>D2.2 Highly available architectures</b>: Multi-AZ, Route 53, RDS failover, Aurora.</td><td>Route 53, RDS, Aurora, High Availability sections.</td><td><span class="tag high">Deep</span> Routing policies, failover, Multi-AZ vs read replicas.</td></tr>
+      <tr><td><b>D2.3 Disaster recovery</b>: backup strategies, RPO/RTO, pilot light, warm standby.</td><td>Disaster Recovery, Backup sections.</td><td><span class="tag medium">Selective</span> DR strategies comparison, RPO/RTO tradeoffs.</td></tr>
+      <tr><td><b>D3.1 High-performing storage</b>: EBS types, EFS, S3 performance, FSx.</td><td>EBS, EFS, S3 Performance, FSx sections.</td><td><span class="tag high">Deep</span> EBS types (gp3/io2/st1), S3 multipart, Transfer Acceleration.</td></tr>
+      <tr><td><b>D3.2 High-performing compute</b>: EC2 types, Lambda, ECS/EKS, placement groups.</td><td>EC2, Lambda, Containers sections.</td><td><span class="tag high">Deep</span> Instance families, Lambda limits, Fargate vs EC2 launch type.</td></tr>
+      <tr><td><b>D3.3 High-performing networking</b>: CloudFront, Global Accelerator, VPC peering, Transit Gateway.</td><td>CloudFront, Global Accelerator, Networking sections.</td><td><span class="tag high">Deep</span> CloudFront vs GA, caching strategies, edge locations.</td></tr>
+      <tr><td><b>D3.4 High-performing databases</b>: DynamoDB, ElastiCache, Redshift, Aurora.</td><td>DynamoDB, ElastiCache, Database sections.</td><td><span class="tag high">Deep</span> DAX vs ElastiCache, partition keys, GSI/LSI, capacity modes.</td></tr>
+      <tr><td><b>D4.1 Cost-effective compute</b>: Reserved, Spot, Savings Plans, right-sizing.</td><td>EC2 Pricing, Savings Plans, Compute Optimizer sections.</td><td><span class="tag medium">Selective</span> When to use each pricing model, Spot interruption handling.</td></tr>
+      <tr><td><b>D4.2 Cost-effective storage</b>: S3 tiers, lifecycle policies, EBS optimization.</td><td>S3 Storage Classes, Lifecycle sections.</td><td><span class="tag medium">Selective</span> S3 tier transitions, Intelligent-Tiering, Glacier retrieval.</td></tr>
+      <tr><td><b>D4.3 Cost-effective networking</b>: data transfer, VPC endpoints, CloudFront caching.</td><td>Data Transfer, VPC Endpoints, Cost sections.</td><td><span class="tag medium">Selective</span> Data transfer costs, NAT Gateway pricing, endpoint savings.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="practice" class="page">
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>Practice Exam Tracker</h2>
+      <table id="practiceTable">
+        <tr><th>Exam</th><th>Date</th><th>Score %</th><th>Pass?</th><th>Top weak domain</th><th>Action</th></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Error Log</h2>
+      <p class="muted">Do not just write the correct answer. Write the rule you missed.</p>
+      <table id="errorTable">
+        <tr><th>Topic</th><th>Wrong assumption</th><th>Correct rule to memorize</th><th>Closed?</th></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="cheat1" class="page">
+  <div class="card"><h2>Cheat Sheet – Domain 1: Design Secure Architectures (30%)</h2>
+    <div class="cheat-grid">
+      <div class="cheat"><h4>IAM policies & roles</h4><ul><li><b>Policy evaluation:</b> explicit Deny > explicit Allow > implicit Deny.</li><li><b>Identity vs resource policies:</b> identity attached to principal, resource attached to service.</li><li><b>Permission boundaries:</b> maximum permissions an identity can have (cap, not grant).</li><li><b>Cross-account:</b> trust policy on role + permissions policy; or resource-based policy.</li><li><b>Federation:</b> SAML 2.0, Web Identity (Cognito), SSO/Identity Center for enterprise.</li></ul></div>
+      <div class="cheat"><h4>KMS & encryption</h4><ul><li><b>CMK types:</b> AWS managed, customer managed, AWS owned (invisible).</li><li><b>Envelope encryption:</b> data key encrypts data, CMK encrypts data key.</li><li><b>Key policies:</b> resource-based policy on the CMK — required for cross-account.</li><li><b>SSE-S3:</b> AWS manages everything. SSE-KMS: audit trail via CloudTrail. SSE-C: you manage keys.</li><li><b>Rotation:</b> automatic yearly for AWS managed; configurable for customer managed.</li></ul></div>
+      <div class="cheat"><h4>VPC security</h4><ul><li><b>Security groups:</b> stateful, allow rules only, instance-level, evaluate all rules.</li><li><b>NACLs:</b> stateless, allow + deny rules, subnet-level, rules evaluated in order.</li><li><b>VPC endpoints:</b> Gateway (S3, DynamoDB — free) vs Interface (most services — ENI + cost).</li><li><b>PrivateLink:</b> expose service to other VPCs without internet/peering/NAT.</li><li><b>Flow Logs:</b> capture IP traffic metadata at VPC/subnet/ENI level.</li></ul></div>
+      <div class="cheat"><h4>WAF, Shield & network protection</h4><ul><li><b>WAF:</b> Layer 7 firewall — SQL injection, XSS, rate limiting, geo-blocking.</li><li><b>Shield Standard:</b> free DDoS protection for all AWS customers (L3/L4).</li><li><b>Shield Advanced:</b> enhanced DDoS, cost protection, 24/7 DRT, $3000/month.</li><li><b>AWS Firewall Manager:</b> centrally manage WAF, Shield, SG rules across accounts.</li><li><b>Network Firewall:</b> managed VPC-level firewall for deep packet inspection.</li></ul></div>
+      <div class="cheat"><h4>Cognito & SSO</h4><ul><li><b>User Pools:</b> authentication — sign-up/sign-in, MFA, hosted UI, JWT tokens.</li><li><b>Identity Pools:</b> authorization — exchange tokens for temporary AWS credentials.</li><li><b>IAM Identity Center (SSO):</b> single sign-on for multiple AWS accounts + apps.</li><li><b>Organizations:</b> SCPs restrict maximum permissions for member accounts.</li><li><b>Resource Access Manager:</b> share resources across accounts without cross-account roles.</li></ul></div>
+      <div class="cheat"><h4>Exam traps</h4><ul><li>SG is stateful (return traffic auto-allowed); NACL is stateless (must allow both).</li><li>S3 bucket policies are resource-based — can grant cross-account without roles.</li><li>KMS key policy is required — IAM policy alone won't work without key policy allowing it.</li><li>VPC Gateway endpoints are free; Interface endpoints cost money.</li><li>Cognito User Pools = auth; Identity Pools = AWS credentials (don't confuse them).</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="cheat2" class="page">
+  <div class="card"><h2>Cheat Sheet – Domain 2: Design Resilient Architectures (26%)</h2>
+    <div class="cheat-grid">
+      <div class="cheat"><h4>Multi-AZ & Auto Scaling</h4><ul><li><b>Multi-AZ RDS:</b> synchronous standby replica, automatic failover, same region.</li><li><b>Read replicas:</b> async replication, can be cross-region, manual promotion.</li><li><b>Aurora:</b> 6 copies across 3 AZs, auto-failover in &lt;30s, up to 15 read replicas.</li><li><b>ASG policies:</b> Target Tracking (simplest), Step Scaling, Simple Scaling, Scheduled.</li><li><b>Cooldown:</b> prevents rapid scale in/out oscillation.</li></ul></div>
+      <div class="cheat"><h4>ELB deep dive</h4><ul><li><b>ALB:</b> Layer 7, HTTP/HTTPS, path/host routing, WebSocket, Lambda targets.</li><li><b>NLB:</b> Layer 4, TCP/UDP, ultra-low latency, static IP, millions of requests/sec.</li><li><b>GWLB:</b> Layer 3, transparent network gateway for 3rd-party appliances.</li><li><b>Cross-zone:</b> distributes traffic evenly across all registered targets in all AZs.</li><li><b>Health checks:</b> unhealthy targets removed; configurable interval/threshold.</li></ul></div>
+      <div class="cheat"><h4>Route 53 routing</h4><ul><li><b>Simple:</b> single resource, no health checks on record.</li><li><b>Weighted:</b> split traffic by percentage (A/B testing, gradual migration).</li><li><b>Latency:</b> route to lowest-latency region for the user.</li><li><b>Failover:</b> active-passive with health checks — automatic DNS failover.</li><li><b>Geolocation/Geoproximity:</b> route by user location or bias toward a region.</li><li><b>Alias:</b> free, native AWS integration (ELB, CloudFront, S3) — always prefer over CNAME.</li></ul></div>
+      <div class="cheat"><h4>S3 replication & durability</h4><ul><li><b>CRR:</b> Cross-Region Replication — DR, compliance, lower latency access.</li><li><b>SRR:</b> Same-Region Replication — log aggregation, live replication between accounts.</li><li><b>Versioning:</b> required for replication; protects against accidental deletes.</li><li><b>11 nines durability:</b> 99.999999999% — data loss is essentially impossible.</li><li><b>S3 Object Lock:</b> WORM model — Governance mode (admin override) vs Compliance mode (no one).</li></ul></div>
+      <div class="cheat"><h4>Disaster recovery strategies</h4><ul><li><b>Backup & Restore:</b> cheapest, highest RPO/RTO (hours). S3, snapshots, AMIs.</li><li><b>Pilot Light:</b> core services running (DB replication), scale up on disaster.</li><li><b>Warm Standby:</b> scaled-down full environment, quick scale-up.</li><li><b>Multi-Site / Hot Standby:</b> full production in 2+ regions, near-zero RTO.</li><li><b>RPO:</b> how much data you can afford to lose. <b>RTO:</b> how fast you must recover.</li></ul></div>
+      <div class="cheat"><h4>Exam traps</h4><ul><li>Multi-AZ is for HA (automatic failover); read replicas are for performance (manual promotion).</li><li>Aurora Multi-AZ failover is faster than RDS Multi-AZ (~30s vs ~60-120s).</li><li>NLB for static IP / extreme performance; ALB for HTTP routing / Lambda.</li><li>Route 53 health checks work with Failover routing — not Simple routing.</li><li>S3 replication doesn't replicate existing objects — only new objects after enabling.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="cheat3" class="page">
+  <div class="card"><h2>Cheat Sheet – Domain 3: Design High-Performing Architectures (24%)</h2>
+    <div class="cheat-grid">
+      <div class="cheat"><h4>CloudFront & Global Accelerator</h4><ul><li><b>CloudFront:</b> CDN, caches at edge locations, HTTPS, OAC for S3, Lambda@Edge.</li><li><b>OAC:</b> Origin Access Control — restrict S3 access to CloudFront only (replaces OAI).</li><li><b>Lambda@Edge:</b> run code at edge for request/response manipulation.</li><li><b>Global Accelerator:</b> Anycast IP, routes to optimal endpoint via AWS backbone (not caching).</li><li><b>When to use:</b> CloudFront for cacheable content; GA for TCP/UDP, gaming, IoT, static IPs.</li></ul></div>
+      <div class="cheat"><h4>ElastiCache</h4><ul><li><b>Redis:</b> complex data types, replication, persistence, pub/sub, sorted sets, Multi-AZ.</li><li><b>Memcached:</b> simple key-value, multi-threaded, no persistence, no replication.</li><li><b>Caching strategies:</b> Lazy Loading (cache miss → DB → cache), Write-Through (write to both).</li><li><b>Session store:</b> store user sessions in ElastiCache for stateless application tier.</li><li><b>Use case:</b> reduce DB reads, leaderboards (Redis sorted sets), session management.</li></ul></div>
+      <div class="cheat"><h4>DynamoDB performance</h4><ul><li><b>Partition key:</b> high cardinality for even distribution — avoid hot partitions.</li><li><b>GSI:</b> alternate partition + sort key, eventually consistent, own throughput.</li><li><b>LSI:</b> same partition key, different sort key, must be created at table creation.</li><li><b>DAX:</b> in-memory cache for DynamoDB — microsecond reads, transparent to app.</li><li><b>Global Tables:</b> multi-region, active-active replication, sub-second latency.</li><li><b>Capacity:</b> On-Demand (unpredictable) vs Provisioned (predictable, cheaper with auto-scaling).</li></ul></div>
+      <div class="cheat"><h4>EBS, EFS & storage performance</h4><ul><li><b>gp3:</b> baseline 3000 IOPS, 125 MB/s — independently scale IOPS/throughput.</li><li><b>io2 Block Express:</b> up to 256,000 IOPS — mission-critical databases.</li><li><b>st1:</b> throughput-optimized HDD — big data, data warehouses, log processing.</li><li><b>EFS:</b> shared NFS, multi-AZ, auto-scaling, Linux only. Performance/Throughput modes.</li><li><b>FSx for Windows:</b> SMB protocol, AD integration. FSx for Lustre: HPC, ML training.</li></ul></div>
+      <div class="cheat"><h4>Lambda & serverless</h4><ul><li><b>Concurrency:</b> reserved (guaranteed) vs provisioned (pre-warmed, no cold start).</li><li><b>Limits:</b> 15 min timeout, 10 GB memory, 512 MB /tmp (10 GB configurable).</li><li><b>Layers:</b> shared code/libraries across functions (up to 5 layers).</li><li><b>Destinations:</b> async invocation success/failure routing (SQS, SNS, Lambda, EventBridge).</li><li><b>VPC access:</b> ENI in VPC subnet — needs NAT Gateway for internet access.</li><li><b>Event sources:</b> API Gateway, S3, DynamoDB Streams, Kinesis, SQS, EventBridge.</li></ul></div>
+      <div class="cheat"><h4>ECS/EKS & containers</h4><ul><li><b>Fargate:</b> serverless containers — no EC2 management, pay per vCPU/memory.</li><li><b>EC2 launch type:</b> you manage instances — more control, can use Spot/Reserved.</li><li><b>Task definitions:</b> container config (image, CPU, memory, ports, env vars).</li><li><b>Service discovery:</b> Cloud Map integration for service-to-service communication.</li><li><b>EKS:</b> managed Kubernetes — use when you need K8s compatibility or portability.</li><li><b>App Runner:</b> simplest container deployment — no infra config, auto-scales.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="cheat4" class="page">
+  <div class="card"><h2>Cheat Sheet – Domain 4: Design Cost-Optimized Architectures (20%)</h2>
+    <div class="cheat-grid">
+      <div class="cheat"><h4>EC2 pricing models</h4><ul><li><b>On-Demand:</b> pay per second, no commitment — short-term, unpredictable workloads.</li><li><b>Reserved (1yr/3yr):</b> up to 72% discount — steady-state, predictable usage.</li><li><b>Savings Plans:</b> flexible commitment ($/hr) — Compute SP (any instance) vs EC2 SP (specific family).</li><li><b>Spot:</b> up to 90% discount — fault-tolerant, flexible workloads, can be interrupted.</li><li><b>Dedicated Hosts:</b> physical server — licensing compliance (per-socket, per-core).</li></ul></div>
+      <div class="cheat"><h4>S3 storage tiers</h4><ul><li><b>Standard:</b> frequently accessed, highest cost, lowest latency.</li><li><b>Standard-IA:</b> infrequent access, lower storage cost, retrieval fee, 30-day minimum.</li><li><b>One Zone-IA:</b> same as IA but single AZ — non-critical, reproducible data.</li><li><b>Intelligent-Tiering:</b> auto-moves objects between tiers — no retrieval fees, monitoring cost.</li><li><b>Glacier Instant:</b> millisecond retrieval, quarterly access pattern.</li><li><b>Glacier Flexible:</b> minutes to hours retrieval. <b>Deep Archive:</b> 12-48 hours, cheapest.</li></ul></div>
+      <div class="cheat"><h4>Right-sizing & Compute Optimizer</h4><ul><li><b>Compute Optimizer:</b> ML-based recommendations for EC2, ASG, Lambda, EBS.</li><li><b>Right-sizing:</b> match instance type/size to actual utilization (CPU, memory, network).</li><li><b>Trusted Advisor:</b> checks for idle/underutilized resources, cost optimization.</li><li><b>Cost Explorer:</b> visualize spending, forecast future costs, identify savings.</li><li><b>Budgets:</b> set custom budgets with alerts when thresholds are exceeded.</li></ul></div>
+      <div class="cheat"><h4>Data transfer costs</h4><ul><li><b>Inbound:</b> free (data into AWS from internet).</li><li><b>Same AZ:</b> free (private IP). Cross-AZ: ~$0.01/GB each way.</li><li><b>Same region, different service:</b> usually free via private IP.</li><li><b>Cross-region:</b> $0.02/GB — use replication wisely.</li><li><b>NAT Gateway:</b> $0.045/hr + $0.045/GB processed — expensive at scale.</li><li><b>VPC endpoints:</b> avoid NAT Gateway costs for S3/DynamoDB (Gateway endpoints are free).</li></ul></div>
+      <div class="cheat"><h4>Architecture cost patterns</h4><ul><li><b>Serverless:</b> Lambda + API Gateway + DynamoDB — pay per request, zero idle cost.</li><li><b>Spot + ASG:</b> use Spot for stateless workers, On-Demand for baseline.</li><li><b>S3 lifecycle:</b> auto-transition to cheaper tiers as data ages.</li><li><b>Batch transform:</b> process data in bulk vs real-time to reduce compute costs.</li><li><b>Caching:</b> CloudFront + ElastiCache reduce origin/DB calls and data transfer.</li></ul></div>
+      <div class="cheat"><h4>Exam traps</h4><ul><li>Spot instances can be interrupted — never use for stateful or time-critical workloads.</li><li>Reserved Instances are regional by default; can be zonal for capacity reservation.</li><li>S3 Intelligent-Tiering has no retrieval fee — unlike Standard-IA/One Zone-IA.</li><li>NAT Gateway is expensive — use VPC Gateway endpoints for S3/DynamoDB instead.</li><li>Data transfer between AZs costs money — design for single-AZ when HA isn't needed.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="backup" class="page">
+  <div class="card">
+    <h2>Backup, Import / Export & Profiles</h2>
+    <div class="callout success"><b>Autosave is enabled.</b><br/>Every checkbox, score, note and error-log entry is saved automatically in this browser under the selected profile.</div>
+    <div class="grid grid-2">
+      <div>
+        <h3>Active profile</h3>
+        <label class="small muted">Use profiles if you want separate progress tracks, e.g. Fast Track, Retake, or another certification.</label>
+        <div class="actions">
+          <select id="profileSelect" onchange="switchProfile(this.value)"></select>
+          <input id="newProfileName" type="text" placeholder="New profile name">
+          <button class="btn" onclick="createProfile()">Create profile</button>
+          <button class="btn secondary" onclick="deleteCurrentProfile()">Delete current profile</button>
+        </div>
+        <div id="profileStatus" class="status"></div>
+      </div>
+      <div>
+        <h3>JSON backup</h3>
+        <p class="small muted">Export creates a timestamped JSON file with your current profile progress. Import restores values into the selected profile.</p>
+        <div class="actions">
+          <button class="btn" onclick="exportTrackerJson()">📤 Export current profile</button>
+          <button class="btn" onclick="document.getElementById('importJsonFile').click()">📥 Import JSON into current profile</button>
+          <input id="importJsonFile" class="file-input" type="file" accept="application/json,.json" onchange="importTrackerJson(event)">
+        </div>
+        <div id="jsonStatus" class="status">No JSON imported/exported yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Local versioned snapshots</h2>
+    <p class="small muted">Create named snapshots before major changes or practice exams. Snapshots stay in this browser and can also be downloaded as JSON.</p>
+    <div class="actions">
+      <input id="snapshotName" type="text" placeholder="Snapshot note, e.g. before Practice 2">
+      <button class="btn" onclick="createSnapshot()">Create local snapshot</button>
+      <button class="btn secondary" onclick="renderSnapshots()">Refresh list</button>
+    </div>
+    <div id="snapshotList" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>Reset options</h2>
+    <div class="actions">
+      <button class="btn secondary" onclick="resetCurrentProfile()">Reset current profile only</button>
+      <button class="btn secondary" onclick="resetAll()">Reset all tracker data</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="../tracker-sync.js" data-tracker-key="aws-sa-associate" data-prefix="saa_"></script>
+<script>
+const masterRows = [
+ ['high','D1','IAM: policies, roles, cross-account, federation, SSO','Policy evaluation logic, trust policies, permission boundaries, SAML/OIDC federation, Identity Center, Organizations SCPs.'],
+ ['high','D1','VPC: subnets, NACLs, security groups, NAT, endpoints, peering, Transit Gateway','Public/private subnets, SG vs NACL, NAT Gateway/Instance, Gateway vs Interface endpoints, VPC peering limits, Transit Gateway hub.'],
+ ['high','D2/D3','EC2: instance types, placement groups, ENI, user data, metadata','Instance families (compute/memory/storage optimized), cluster/spread/partition placement, bootstrap scripts, IMDS v2.'],
+ ['high','D1/D2','S3: storage classes, lifecycle, replication, encryption, access points, presigned URLs','Standard/IA/One Zone-IA/Intelligent-Tiering/Glacier tiers, lifecycle transitions, CRR/SRR, SSE-S3/SSE-KMS/SSE-C, bucket policies.'],
+ ['high','D2','RDS/Aurora: Multi-AZ, read replicas, failover, Aurora Serverless, Global Database','Synchronous standby vs async replicas, automatic failover, Aurora 6-copy storage, Serverless v2 scaling, Global Database for DR.'],
+ ['high','D2/D3','DynamoDB: partition keys, GSI/LSI, DAX, Streams, Global Tables, capacity modes','High-cardinality keys, secondary indexes, DAX caching, change data capture, multi-region active-active, On-Demand vs Provisioned.'],
+ ['high','D2/D3','ELB/ASG: ALB/NLB/GWLB, target groups, health checks, scaling policies','Layer 7 vs Layer 4, path/host routing, sticky sessions, target tracking/step scaling, cross-zone load balancing.'],
+ ['high','D2','Route 53: routing policies, health checks, failover, alias records','Simple/Weighted/Latency/Failover/Geolocation/Geoproximity routing, alias vs CNAME, active-passive failover.'],
+ ['high','D3','CloudFront: distributions, origins, OAC, Lambda@Edge, caching','Edge locations, OAC for S3, cache behaviors, TTL, invalidation, signed URLs/cookies, Lambda@Edge use cases.'],
+ ['high','D3','Lambda: concurrency, layers, destinations, VPC access, event sources','Reserved/provisioned concurrency, cold starts, 15-min timeout, ENI in VPC, async destinations, event source mappings.'],
+ ['high','D1','KMS/encryption: CMK, envelope encryption, key policies, SSE-S3/SSE-KMS/SSE-C','AWS managed vs customer managed keys, data key encryption, key rotation, cross-account key sharing, encryption in transit (TLS).'],
+ ['medium','D2/D3','SQS/SNS/EventBridge: decoupling, fan-out, DLQ, FIFO, event-driven','Standard vs FIFO queues, visibility timeout, DLQ for failed messages, SNS fan-out pattern, EventBridge rules and targets.'],
+ ['medium','D3','ECS/EKS: Fargate vs EC2, task definitions, service discovery','Serverless containers, task CPU/memory, service auto-scaling, Cloud Map, ALB integration, ECR for images.'],
+ ['medium','D2','CloudFormation/CDK: IaC, stacks, change sets, drift detection','Template anatomy, intrinsic functions, stack updates, nested stacks, StackSets for multi-account, drift detection.'],
+ ['medium','D2/D3','CloudWatch: metrics, alarms, logs, dashboards, X-Ray','Custom metrics, composite alarms, Logs Insights queries, X-Ray tracing for distributed apps, ServiceLens.'],
+ ['medium','D1/D2','Direct Connect/VPN: hybrid connectivity, redundancy','Dedicated vs hosted connections, VPN as backup, Direct Connect Gateway, LAG for redundancy, encryption over DX.'],
+ ['medium','D4','Cost optimization: Reserved, Spot, Savings Plans, Compute Optimizer, S3 tiers','Pricing model selection, Spot interruption handling, Compute Optimizer recommendations, lifecycle policies, right-sizing.'],
+ ['medium','D2','Disaster recovery: backup strategies, RPO/RTO, pilot light, warm standby, multi-site','DR strategy comparison, cost vs recovery time tradeoffs, AWS Backup, cross-region snapshots, Route 53 failover.']
+];
+
+const days = [
+ ['Day 1','Exam overview + IAM deep dive','Read official SAA-C03 guide. Watch IAM sections: policies, roles, cross-account, federation, Identity Center.','D1'],
+ ['Day 2','VPC networking & security','Subnets, route tables, SG vs NACL, NAT Gateway, VPC endpoints, peering, Transit Gateway, Flow Logs.','D1'],
+ ['Day 3','KMS, encryption & security services','KMS key types, envelope encryption, SSE options, WAF, Shield, Secrets Manager, ACM, Cognito.','D1'],
+ ['Day 4','EC2 deep dive','Instance types, placement groups, AMIs, user data, metadata, ENI, pricing models overview.','D2/D3'],
+ ['Day 5','S3 mastery','Storage classes, lifecycle, versioning, replication, encryption, access points, presigned URLs. Do 20 questions.','D1/D2'],
+ ['Day 6','RDS & Aurora','Multi-AZ, read replicas, failover, Aurora architecture, Serverless v2, Global Database, backups.','D2'],
+ ['Day 7','DynamoDB & ElastiCache','Partition keys, GSI/LSI, DAX, Streams, Global Tables, capacity modes, Redis vs Memcached, caching strategies.','D2/D3'],
+ ['Day 8','ELB & Auto Scaling','ALB/NLB/GWLB, target groups, health checks, cross-zone, ASG policies, scaling cooldown.','D2/D3'],
+ ['Day 9','Route 53 & DNS','Routing policies, health checks, failover, alias records, domain registration, hosted zones.','D2'],
+ ['Day 10','CloudFront & Global Accelerator','Distributions, origins, OAC, caching, Lambda@Edge, signed URLs, GA vs CloudFront.','D3'],
+ ['Day 11','Lambda & serverless','Concurrency, layers, destinations, VPC access, event sources, API Gateway integration.','D3'],
+ ['Day 12','Containers: ECS/EKS/Fargate','Task definitions, services, Fargate vs EC2, service discovery, App Runner, ECR.','D3'],
+ ['Day 13','SQS, SNS, EventBridge & decoupling','Standard/FIFO queues, DLQ, fan-out, event-driven architecture, Step Functions.','D2/D3'],
+ ['Day 14','CloudFormation, CloudWatch, X-Ray','IaC templates, stacks, change sets, metrics, alarms, Logs Insights, distributed tracing.','D2/D3'],
+ ['Day 15','Hybrid: Direct Connect, VPN, Storage Gateway','DX dedicated/hosted, VPN backup, Storage Gateway types, DataSync, Transfer Family.','D1/D2'],
+ ['Day 16','Cost optimization & DR strategies','Pricing models, Savings Plans, Spot, right-sizing, Compute Optimizer, DR strategies, RPO/RTO.','D4/D2'],
+ ['Day 17','Practice exam 1','Full exam under timed conditions (130 min). Fill error log. Identify top 3 weak areas.','All'],
+ ['Day 18','Weak-area repair 1','Rewatch only weak lessons. Make/refresh cheat cards. Do targeted questions per weak domain.','All'],
+ ['Day 19','Practice exam 2','Full exam. Target ≥80%. Update error log and mark repeated mistake patterns.','All'],
+ ['Day 20','Weak-area repair 2','Focus only repeated mistakes: security, networking, storage selection, cost scenarios.','All'],
+ ['Day 21','Final review / exam day','No new material. Review error log, all four cheat sheets, service comparison tables.','All']
+];
+
+
+const SAA_PROFILE_LIST_KEY='saa_profiles';
+const SAA_ACTIVE_PROFILE_KEY='saa_active_profile';
+const SAA_SNAPSHOT_KEY='saa_snapshots_v3';
+function safeProfileName(name){return String(name||'Default').trim().replace(/\s+/g,' ').slice(0,40)||'Default'}
+function profileId(name){return safeProfileName(name).toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'')||'default'}
+function getProfiles(){try{return JSON.parse(localStorage.getItem(SAA_PROFILE_LIST_KEY))||['Default']}catch(e){return ['Default']}}
+function setProfiles(list){localStorage.setItem(SAA_PROFILE_LIST_KEY,JSON.stringify([...new Set(list.map(safeProfileName))]))}
+function getActiveProfile(){const profiles=getProfiles();const active=localStorage.getItem(SAA_ACTIVE_PROFILE_KEY)||profiles[0]||'Default';return profiles.includes(active)?active:profiles[0]||'Default'}
+function setActiveProfile(name){const clean=safeProfileName(name);const profiles=getProfiles();if(!profiles.includes(clean)){profiles.push(clean);setProfiles(profiles)}localStorage.setItem(SAA_ACTIVE_PROFILE_KEY,clean)}
+function key(s){return 'saa_'+profileId(getActiveProfile())+'_'+s}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));if(btn)btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});if(id==='backup'){renderProfiles();renderSnapshots();}}
+function clearRenderedFields(){document.querySelectorAll('[data-track]').forEach(el=>{if(el.type==='checkbox')el.checked=false;else el.value='';});}
+function migrateLegacyIfNeeded(){
+ const marker='saa_'+profileId('Default')+'_migrated_legacy';
+ if(localStorage.getItem(marker))return;
+ let found=false;
+ Object.keys(localStorage).filter(k=>/^saa_(m|d|mc|mn|dn|pdate|pscore|ppass|pweak|paction|etopic|emistake|erule|eclosed)/.test(k)).forEach(k=>{
+  const id=k.replace(/^saa_/,'');
+  if(!localStorage.getItem('saa_default_'+id)){localStorage.setItem('saa_default_'+id,localStorage.getItem(k));found=true;}
+ });
+ localStorage.setItem(marker,found?'1':'0');
+}
+function renderProfiles(){
+ const sel=document.getElementById('profileSelect'); if(!sel)return;
+ const profiles=getProfiles(); const active=getActiveProfile();
+ sel.innerHTML=profiles.map(p=>`<option value="${p.replace(/"/g,'&quot;')}" ${p===active?'selected':''}>${p}</option>`).join('');
+ const ps=document.getElementById('profileStatus'); if(ps)ps.textContent=`Active profile: ${active}. Autosave key: ${profileId(active)}.`;
+}
+function switchProfile(name){setActiveProfile(name);clearRenderedFields();loadFields();renderProfiles();renderSnapshots();const st=document.getElementById('jsonStatus');if(st)st.textContent=`Switched to profile "${getActiveProfile()}".`;}
+function createProfile(){const el=document.getElementById('newProfileName');const name=safeProfileName(el?.value);if(!name)return;setActiveProfile(name);if(el)el.value='';clearRenderedFields();loadFields();renderProfiles();renderSnapshots();}
+function deleteCurrentProfile(){
+ const active=getActiveProfile(); if(active==='Default'){alert('The Default profile cannot be deleted. Reset it instead.');return;}
+ if(!confirm(`Delete profile "${active}" and its saved values from this browser?`))return;
+ Object.keys(localStorage).filter(k=>k.startsWith('saa_'+profileId(active)+'_')).forEach(k=>localStorage.removeItem(k));
+ const profiles=getProfiles().filter(p=>p!==active); setProfiles(profiles.length?profiles:['Default']); setActiveProfile(profiles[0]||'Default'); clearRenderedFields(); loadFields(); renderProfiles(); renderSnapshots();
+}
+function renderMaster(){
+ const tbl=document.getElementById('masterTable');
+ masterRows.forEach((r,i)=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td><input type="checkbox" data-track="m${i}"></td><td><span class="tag ${r[0]}">${r[0]}</span></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td><select data-track="mc${i}"><option></option><option>1 - weak</option><option>2</option><option>3</option><option>4</option><option>5 - confident</option></select></td><td><textarea data-track="mn${i}" placeholder="Notes / gaps / links"></textarea></td>`;
+  tbl.appendChild(tr);
+ });
+}
+function renderDays(){
+ const grid=document.getElementById('dailyGrid');
+ days.forEach((d,i)=>{
+  const div=document.createElement('div');div.className='day-card';
+  div.innerHTML=`<h3>${d[0]} <input style="float:right" type="checkbox" data-track="d${i}"></h3><span class="tag domain${d[3].includes('D4')?4:d[3].includes('D3')?3:d[3].includes('D2')?2:1}">${d[3]}</span><p><b>${d[1]}</b></p><p class="small">${d[2]}</p><textarea data-track="dn${i}" placeholder="Daily notes / blockers"></textarea>`;
+  grid.appendChild(div);
+ });
+}
+function renderPractice(){
+ const p=document.getElementById('practiceTable');
+ for(let i=1;i<=5;i++){
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>Practice ${i}</td><td><input type="text" data-track="pdate${i}" placeholder="YYYY-MM-DD"></td><td><input type="number" min="0" max="100" data-track="pscore${i}"></td><td><input type="checkbox" data-track="ppass${i}"></td><td><input type="text" data-track="pweak${i}" placeholder="D1/D2/D3/D4"></td><td><textarea data-track="paction${i}" placeholder="What to repair"></textarea></td>`;
+  p.appendChild(tr);
+ }
+ const e=document.getElementById('errorTable');
+ for(let i=1;i<=12;i++){
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td><input type="text" data-track="etopic${i}" placeholder="e.g., VPC endpoint types"></td><td><textarea data-track="emistake${i}"></textarea></td><td><textarea data-track="erule${i}"></textarea></td><td><input type="checkbox" data-track="eclosed${i}"></td>`;
+  e.appendChild(tr);
+ }
+}
+function saveField(el){const id=el.dataset.track;if(!id)return;if(el.type==='checkbox')localStorage.setItem(key(id),el.checked?'1':'0');else localStorage.setItem(key(id),el.value);localStorage.setItem('saa_last_saved',new Date().toISOString());updateStats();updateAutosaveStatus();}
+function loadFields(){document.querySelectorAll('[data-track]').forEach(el=>{const v=localStorage.getItem(key(el.dataset.track));if(v!==null){if(el.type==='checkbox')el.checked=v==='1';else el.value=v;}el.oninput=()=>saveField(el);el.onchange=()=>saveField(el);});updateStats();updateAutosaveStatus();}
+function updateAutosaveStatus(){const ps=document.getElementById('profileStatus');if(ps){const last=localStorage.getItem('saa_last_saved');ps.textContent=`Active profile: ${getActiveProfile()}. ${last?'Last autosave: '+new Date(last).toLocaleString(): 'No autosave yet.'}`;}}
+function updateStats(){
+ const checks=[...document.querySelectorAll('input[type="checkbox"][data-track]')].filter(x=>/^m|^d/.test(x.dataset.track));
+ const done=checks.filter(x=>x.checked).length; const pct=checks.length?Math.round(done/checks.length*100):0;
+ document.getElementById('overallPct').textContent=pct+'%';document.getElementById('overallBar').style.width=pct+'%';
+ const highIdx=masterRows.map((r,i)=>r[0]==='high'?i:null).filter(x=>x!==null); const hd=highIdx.filter(i=>document.querySelector(`[data-track="m${i}"]`)?.checked).length;
+ document.getElementById('highDone').textContent=`${hd}/${highIdx.length}`;
+ const scores=[1,2,3,4,5].map(i=>Number(localStorage.getItem(key('pscore'+i))||0)).filter(x=>x>0);
+ const ready=scores.filter(x=>x>=80).length>=2 && hd===highIdx.length;
+ document.getElementById('readyScore').textContent=ready?'Ready':'Not ready';
+ const next=days.find((d,i)=>!document.querySelector(`[data-track="d${i}"]`)?.checked);
+ document.getElementById('nextAction').textContent=next?`${next[0]}: ${next[1]}`:'Final review / book exam';
+}
+
+function trackerData(){
+ const fields=[...document.querySelectorAll('[data-track]')].map(el=>el.dataset.track);
+ const data={app:'aws-sa-associate-tracker',schemaVersion:3,profile:getActiveProfile(),exportedAt:new Date().toISOString(),values:{},meta:{title:document.title,totalFields:fields.length}};
+ fields.forEach(id=>{const el=document.querySelector(`[data-track="${CSS.escape(id)}"]`);if(!el)return;data.values[id]=el.type==='checkbox'?!!el.checked:el.value;});
+ return data;
+}
+function downloadJson(data,filename){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);}
+function exportTrackerJson(){const data=trackerData();const stamp=new Date().toISOString().replace(/[:.]/g,'-');downloadJson(data,`aws-saa-${profileId(getActiveProfile())}-progress-${stamp}.json`);const st=document.getElementById('jsonStatus');if(st)st.textContent=`Exported ${Object.keys(data.values).length} fields from "${getActiveProfile()}" to a versioned JSON backup.`;}
+function applyTrackerData(data){
+ if(!data||typeof data!=='object'||!data.values||typeof data.values!=='object')throw new Error('Invalid tracker JSON file.');
+ let imported=0;
+ Object.entries(data.values).forEach(([id,val])=>{const el=document.querySelector(`[data-track="${CSS.escape(id)}"]`);if(!el)return;if(el.type==='checkbox'){el.checked=(val===true||val==='1'||val==='true');localStorage.setItem(key(id),el.checked?'1':'0');}else{el.value=val==null?'':String(val);localStorage.setItem(key(id),el.value);}imported++;});
+ localStorage.setItem('saa_last_saved',new Date().toISOString()); updateStats();updateAutosaveStatus();
+ const st=document.getElementById('jsonStatus');if(st)st.textContent=`Imported ${imported} fields into profile "${getActiveProfile()}". Refresh not required.`;
+}
+function importTrackerJson(event){const file=event.target.files&&event.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(data.app&&data.app!=='aws-sa-associate-tracker'){if(!confirm('This JSON does not look like it was exported from this tracker. Import anyway?'))return;}if(data.profile&&data.profile!==getActiveProfile()){if(!confirm(`This backup was exported from profile "${data.profile}". Import into current profile "${getActiveProfile()}"?`))return;}applyTrackerData(data);}catch(err){alert('Could not import JSON: '+err.message);}finally{event.target.value='';}};reader.readAsText(file);}
+function getSnapshots(){try{return JSON.parse(localStorage.getItem(SAA_SNAPSHOT_KEY))||[]}catch(e){return []}}
+function setSnapshots(snaps){localStorage.setItem(SAA_SNAPSHOT_KEY,JSON.stringify(snaps.slice(0,20)))}
+function createSnapshot(){const note=safeProfileName(document.getElementById('snapshotName')?.value||'Manual snapshot');const data=trackerData();data.snapshotNote=note;const snaps=getSnapshots();snaps.unshift({id:Date.now().toString(),profile:getActiveProfile(),createdAt:data.exportedAt,note,data});setSnapshots(snaps);const el=document.getElementById('snapshotName');if(el)el.value='';renderSnapshots();}
+function restoreSnapshot(id){const snap=getSnapshots().find(s=>s.id===id);if(!snap)return;if(!confirm(`Restore snapshot "${snap.note}" into current profile "${getActiveProfile()}"?`))return;applyTrackerData(snap.data);renderSnapshots();}
+function downloadSnapshot(id){const snap=getSnapshots().find(s=>s.id===id);if(!snap)return;downloadJson(snap.data,`aws-saa-${profileId(snap.profile)}-snapshot-${snap.createdAt.replace(/[:.]/g,'-')}.json`)}
+function deleteSnapshot(id){setSnapshots(getSnapshots().filter(s=>s.id!==id));renderSnapshots();}
+function renderSnapshots(){const target=document.getElementById('snapshotList');if(!target)return;const active=getActiveProfile();const snaps=getSnapshots().filter(s=>s.profile===active);if(!snaps.length){target.textContent='No snapshots for this profile yet.';return;}target.innerHTML=snaps.map(s=>`<div class="snapshot-row"><div><b>${s.note}</b><br><code>${new Date(s.createdAt).toLocaleString()} · ${Object.keys(s.data.values||{}).length} fields</code></div><div class="actions"><button class="btn secondary" onclick="restoreSnapshot('${s.id}')">Restore</button><button class="btn secondary" onclick="downloadSnapshot('${s.id}')">Download</button><button class="btn secondary" onclick="deleteSnapshot('${s.id}')">Delete</button></div></div>`).join('');}
+function resetCurrentProfile(){if(confirm(`Reset saved tracker data for profile "${getActiveProfile()}"?`)){Object.keys(localStorage).filter(k=>k.startsWith('saa_'+profileId(getActiveProfile())+'_')).forEach(k=>localStorage.removeItem(k));clearRenderedFields();loadFields();renderProfiles();renderSnapshots();}}
+function resetAll(){if(confirm('Reset ALL tracker profiles, snapshots and saved data in this browser?')){Object.keys(localStorage).filter(k=>k.startsWith('saa_')).forEach(k=>localStorage.removeItem(k));location.reload();}}
+if(!localStorage.getItem(SAA_PROFILE_LIST_KEY)){setProfiles(['Default']);setActiveProfile('Default');}
+migrateLegacyIfNeeded();
+renderMaster();renderDays();renderPractice();renderProfiles();loadFields();renderSnapshots();
+</script>
+</body>
+</html>
