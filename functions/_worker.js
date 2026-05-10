@@ -1,8 +1,9 @@
 /**
- * Cloudflare Worker — HTML Trackers
+ * Cloudflare Pages Worker — HTML Trackers
  *
- * Static files are served automatically by Cloudflare via [assets] in wrangler.toml.
- * This worker only handles /api/ routes for state sync.
+ * Deployed as a Cloudflare Pages project with _worker.js advanced mode.
+ * Static files are served automatically via env.ASSETS for non-API routes.
+ * This worker intercepts /api/ routes for state sync.
  *
  * Endpoints:
  *   GET  /api/state/:key  → read tracker state from KV
@@ -18,9 +19,8 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // Only handle /api/ routes — everything else is served as static assets
+    // Non-API routes — let Cloudflare Pages serve static assets
     if (!path.startsWith('/api/')) {
-      // Return nothing — Cloudflare will serve the static asset
       return env.ASSETS.fetch(request);
     }
 
@@ -64,7 +64,17 @@ export default {
         });
       }
 
-      return new Response(JSON.stringify({ data: JSON.parse(value) }), {
+      let parsed;
+      try {
+        parsed = JSON.parse(value);
+      } catch (e) {
+        return new Response(JSON.stringify({ data: null, error: 'Malformed data in KV' }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      return new Response(JSON.stringify({ data: parsed }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
@@ -80,7 +90,16 @@ export default {
         });
       }
 
-      const body = await request.json();
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
       await env.TRACKER_STATE.put(key, JSON.stringify(body));
 
       return new Response(JSON.stringify({ ok: true }), {
@@ -106,3 +125,4 @@ export default {
     });
   },
 };
+
