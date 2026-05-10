@@ -1,13 +1,7 @@
 name = "html-trackers"
-main = "_worker.js"
-compatibility_date = "2024-12-01"
+pages_build_output_dir = "./"
 
-# Serve static HTML/CSS/JS files from the project root
-[assets]
-directory = "./"
-
-# KV Namespace — create with: wrangler kv namespace create TRACKER_STATE
-# Then paste the id below
 [[kv_namespaces]]
 binding = "TRACKER_STATE"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+id = "988b27e5e34242039ca862df143e4a39"
+
