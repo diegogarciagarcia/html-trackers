@@ -1,5 +1,5 @@
 name = "html-trackers"
-main = "worker.js"
+main = "_worker.js"
 compatibility_date = "2024-12-01"
 
 # Serve static HTML/CSS/JS files from the project root
