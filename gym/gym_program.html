@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Training Program Dashboard</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e5e7eb;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --accent-light: #dbeafe;
+      --success: #dcfce7;
+      --warning: #fef3c7;
+      --danger: #fee2e2;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .app {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    header.hero {
+      background: linear-gradient(135deg, #1d4ed8, #0f172a);
+      color: white;
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: #dbeafe;
+      font-size: 16px;
+    }
+
+    .top-menu {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      background: rgba(245, 247, 251, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 12px 0 16px;
+      margin-bottom: 10px;
+    }
+
+    .tab-button {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.18s ease;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .tab-button:hover,
+    .tab-button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-title p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    h3 {
+      margin: 0 0 12px;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      color: var(--accent-dark);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f3f4f6;
+      color: #344054;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    td[contenteditable="true"] {
+      background: #f8fafc;
+      outline: 1px dashed #cbd5e1;
+      border-radius: 8px;
+    }
+
+    td[contenteditable="true"]:focus {
+      background: #ffffff;
+      outline: 2px solid rgba(37, 99, 235, 0.35);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      background: var(--accent-light);
+      color: #1e40af;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .note {
+      background: #f9fafb;
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      padding: 13px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .callout { border-left: 5px solid var(--accent); }
+
+    .rule {
+      display: flex;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .rule:last-child { border-bottom: none; }
+
+    .badge {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .small { color: var(--muted); font-size: 13px; }
+    .success { background: var(--success); }
+    .warning { background: var(--warning); }
+    .danger { background: var(--danger); }
+
+    .list-clean {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .list-clean li { margin: 6px 0; }
+    .equipment-card { border-top: 5px solid var(--accent); }
+
+    .print-note {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .search-box {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 14px;
+      background: #ffffff;
+      color: var(--text);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+    .guide-group { margin-bottom: 18px; }
+
+    .guide-group h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .group-tag {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .pct-low {
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 800;
+      border-radius: 8px;
+    }
+
+    .pct-ideal {
+      background: var(--success);
+      color: #166534;
+      font-weight: 800;
+      border-radius: 8px;
+    }
+
+    .pct-hypertrophy {
+      background: var(--warning);
+      color: #92400e;
+      font-weight: 800;
+      border-radius: 8px;
+    }
+
+    .pct-heavy {
+      background: var(--danger);
+      color: #991b1b;
+      font-weight: 800;
+      border-radius: 8px;
+    }
+
+    .equipment-label {
+      display: inline-block;
+      margin: 2px 4px 2px 0;
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #eef2ff;
+      color: #3730a3;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .app { padding: 14px; }
+      h1 { font-size: 27px; }
+      .section-title { align-items: start; flex-direction: column; }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+      table { font-size: 13px; }
+      th, td { padding: 8px; }
+      .tab-button { font-size: 13px; padding: 9px 11px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .app { max-width: none; padding: 0; }
+      .top-menu { display: none; }
+      .page-section { display: block !important; break-before: page; }
+      .page-section:first-of-type { break-before: auto; }
+      header.hero, .card { box-shadow: none; }
+      .card { break-inside: avoid; }
+      @page { size: A4; margin: 12mm; }
+    }
+    .back-nav { padding: 12px 22px; font-size: 14px; font-weight: 600; }
+    .back-nav .back-link { color: #2563eb; text-decoration: none; }
+    .back-nav .back-link:hover { text-decoration: underline; }
+    @media print { .back-nav { display: none; } }
+  </style>
+</head>
+<body>
+<nav class="back-nav" aria-label="Site navigation">
+  <a href="../index.html" class="back-link">← Back to Home</a>
+</nav>
+  <main class="app">
+    <header class="hero">
+      <h1>Training Program Dashboard</h1>
+      <p class="subtitle">Reference weights · Weekly program · Equipment alternatives · Exercise guide · Printable cheat sheet</p>
+      <div class="pill-row">
+        <span class="pill">A → Cardio → B → Cardio</span>
+        <span class="pill">2 strength days</span>
+        <span class="pill">2 rowing days</span>
+        <span class="pill">Flexible equipment</span>
+      </div>
+    </header>
+
+    <nav class="top-menu" aria-label="Page selector">
+      <button class="tab-button active" onclick="showPage('reference', this)">1RM Reference</button>
+      <button class="tab-button" onclick="showPage('program', this)">Program Instructions</button>
+      <button class="tab-button" onclick="showPage('templates', this)">Equipment Templates</button>
+      <button class="tab-button" onclick="showPage('guide', this)">Exercise Guide</button>
+      <button class="tab-button" onclick="showPage('cheatsheet', this)">Cheat Sheet</button>
+      <button class="tab-button" onclick="showPage('sessionlog', this)">Session Log</button>
+    </nav>
+
+    <section id="reference" class="page-section active">
+      <div class="section-title">
+        <div>
+          <h2>1RM Reference & Working Loads</h2>
+          <p>Grouped by muscle area. Exercises are alphabetical inside each group.</p>
+        </div>
+        <div class="print-note">Use the working-weight column as the starting point.</div>
+      </div>
+
+      <div class="card span-12">
+        <div class="note" style="margin-bottom: 14px;">
+          The <strong>Last Used</strong> and <strong>Highest</strong> columns auto-populate from your Weekly Training Tracker data. Last Used cells remain editable — type a number to override, and the % column updates automatically.
+        </div>
+
+        <div class="note" style="margin-bottom: 14px;">
+          <strong>Quick % Insight:</strong><br>
+          • <strong>60–70%</strong> → endurance / high reps (your current 3×12–15 zone)<br>
+          • <strong>70–80%</strong> → hypertrophy sweet spot<br>
+          • <strong>80%+</strong> → strength focus (lower reps)<br>
+          <br>
+          👉 Aim to stay mostly in <strong>65–75%</strong> for this program.
+        </div>
+
+        <div class="guide-group">
+          <h3>Lower Body <span class="group-tag">Alphabetical</span></h3>
+          <table>
+            <thead>
+              <tr><th>Exercise</th><th>1RM</th><th>Working</th><th>%</th><th>Last Used</th><th>%</th><th>Highest</th><th>%</th><th>Dumbbells</th><th>Barbell</th></tr>
+            </thead>
+            <tbody>
+              <tr data-one-rm="93.4"><td>Abductor (Outer)</td><td>93.4</td><td>60</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>—</td><td>—</td></tr>
+              <tr data-one-rm="60"><td>Adductor (Inner)</td><td>60</td><td>38</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>—</td><td>—</td></tr>
+              <tr data-one-rm="160"><td>Deadlift</td><td>160</td><td>90</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>40–50 kg each</td><td>85–95 kg</td></tr>
+              <tr data-one-rm="200"><td>Hip Thrust</td><td>200</td><td>115</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>50–60 kg total</td><td>110–120 kg</td></tr>
+              <tr data-one-rm="70"><td>Leg Curl</td><td>70</td><td>43</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>—</td><td>—</td></tr>
+              <tr data-one-rm="76.7"><td>Leg Extension</td><td>76.7</td><td>46</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>—</td><td>—</td></tr>
+              <tr data-one-rm="200"><td>Leg Press</td><td>200</td><td>135</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>40–50 kg total</td><td>80–100 kg</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="guide-group">
+          <h3>Upper Body Push <span class="group-tag">Alphabetical</span></h3>
+          <table>
+            <thead>
+              <tr><th>Exercise</th><th>1RM</th><th>Working</th><th>%</th><th>Last Used</th><th>%</th><th>Highest</th><th>%</th><th>Dumbbells</th><th>Barbell</th></tr>
+            </thead>
+            <tbody>
+              <tr data-one-rm="84"><td>Chest Press</td><td>84</td><td>52</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>22–24 kg each</td><td>~50 kg</td></tr>
+              <tr data-one-rm="40"><td>Overhead Press</td><td>40</td><td>23</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>10–12 kg each</td><td>~25 kg</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="guide-group">
+          <h3>Upper Body Pull <span class="group-tag">Alphabetical</span></h3>
+          <table>
+            <thead>
+              <tr><th>Exercise</th><th>1RM</th><th>Working</th><th>%</th><th>Last Used</th><th>%</th><th>Highest</th><th>%</th><th>Dumbbells</th><th>Barbell</th></tr>
+            </thead>
+            <tbody>
+              <tr data-one-rm="73.4"><td>Lat Pulldown</td><td>73.4</td><td>48</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>—</td><td>~45–50 kg</td></tr>
+              <tr data-one-rm="86.7"><td>Low Row</td><td>86.7</td><td>52</td><td class="calc-working"></td><td contenteditable="true" class="last-used"></td><td class="calc-last"></td><td class="highest"></td><td class="calc-highest"></td><td>24–26 kg each</td><td>~50 kg</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="page-section">
+      <div class="section-title">
+        <div>
+          <h2>Program Instructions</h2>
+          <p>How to run the weekly structure, how to execute each session, and how to progress.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card span-6 callout">
+          <h3>Weekly Structure</h3>
+          <div class="pill-row">
+            <span class="pill">Strength A</span>
+            <span class="pill">Cardio Intervals</span>
+            <span class="pill">Strength B</span>
+            <span class="pill">Cardio Steady</span>
+          </div>
+          <p><strong>Use sequence, not fixed days:</strong> A → Cardio → B → Cardio → repeat.</p>
+          <div class="note">If you miss a day, continue where you left off. Do not skip a strength session just to stay aligned with the calendar.</div>
+        </div>
+
+        <div class="card span-6">
+          <h3>Priority If You Skip Sessions</h3>
+          <div class="rule"><span class="badge">1</span><div><strong>Strength A & B</strong><br><span class="small">Highest priority. If you only train twice, do both strength days.</span></div></div>
+          <div class="rule"><span class="badge">2</span><div><strong>Cardio Intervals</strong><br><span class="small">Next priority for conditioning and performance.</span></div></div>
+          <div class="rule"><span class="badge">3</span><div><strong>Steady Cardio</strong><br><span class="small">Useful, but easiest to skip when life gets busy.</span></div></div>
+        </div>
+
+        <div class="card span-6">
+          <h3>Strength A — Moderate / Heavy</h3>
+          <table>
+            <thead><tr><th>Block</th><th>Pattern</th><th>Target</th></tr></thead>
+            <tbody>
+              <tr><td>Block 1</td><td>Lower Push + Upper Push</td><td>3×10–12</td></tr>
+              <tr><td>Block 2</td><td>Hip Hinge + Upper Pull</td><td>3×10–12</td></tr>
+              <tr><td>Core</td><td>Plank + Knee Raises</td><td>3 sets</td></tr>
+              <tr><td>Finish</td><td>Easy rowing</td><td>8–10 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-6">
+          <h3>Strength B — Volume / Technique</h3>
+          <table>
+            <thead><tr><th>Block</th><th>Pattern</th><th>Target</th></tr></thead>
+            <tbody>
+              <tr><td>Block 1</td><td>Hinge + Vertical Push</td><td>Deadlift 3×8–10, Press 3×12–15</td></tr>
+              <tr><td>Block 2</td><td>Hamstrings + Pull</td><td>3×12–15</td></tr>
+              <tr><td>Core</td><td>Side Plank + Cable Crunch / Alternative</td><td>3 sets</td></tr>
+              <tr><td>Finish</td><td>Easy rowing</td><td>8–10 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-6">
+          <h3>Rest Times</h3>
+          <div class="rule"><span class="badge">A</span><div><strong>Strength A</strong><br><span class="small">30–45 sec between exercises. 75–90 sec between rounds.</span></div></div>
+          <div class="rule"><span class="badge">B</span><div><strong>Strength B</strong><br><span class="small">45–60 sec between exercises in hinge block. 60–90 sec between rounds.</span></div></div>
+          <div class="rule"><span class="badge">C</span><div><strong>Core</strong><br><span class="small">30–45 sec between sets. Stay controlled.</span></div></div>
+        </div>
+
+        <div class="card span-6">
+          <h3>Execution Rules</h3>
+          <ul class="list-clean">
+            <li>Alternate exercises within each block: A1 → rest → A2 → rest → repeat.</li>
+            <li>Do not complete all sets of one exercise first.</li>
+            <li>Work at RPE 8–9, leaving 1–2 reps in reserve.</li>
+            <li>For deadlift, prioritise form and use 8–10 reps rather than 15 reps.</li>
+            <li>If form breaks, stop the set even if reps are not complete.</li>
+          </ul>
+        </div>
+
+        <div class="card span-6">
+          <h3>Cardio</h3>
+          <table>
+            <thead><tr><th>Session</th><th>Protocol</th></tr></thead>
+            <tbody>
+              <tr><td>Intervals</td><td>5 min warm-up · 6–8 rounds of 1 min hard / 2 min easy · 5 min cooldown</td></tr>
+              <tr><td>Steady</td><td>30–40 min easy rowing, conversational pace</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-6">
+          <h3>Progression</h3>
+          <div class="rule success"><span class="badge">↑</span><div><strong>Increase</strong><br><span class="small">If all sets hit the top target: e.g. 12/12/12 or 15/15/15.</span></div></div>
+          <div class="rule warning"><span class="badge">=</span><div><strong>Hold</strong><br><span class="small">If performance is mixed but form is solid.</span></div></div>
+          <div class="rule danger"><span class="badge">↓</span><div><strong>Reduce</strong><br><span class="small">If you miss the minimum target or technique breaks down.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="templates" class="page-section">
+      <div class="section-title">
+        <div>
+          <h2>Equipment Templates</h2>
+          <p>Use these swaps when machines are busy. Keep the movement pattern; change the tool.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card span-6 equipment-card">
+          <h3>Strength A</h3>
+          <h4>Block 1 — Lower Push + Upper Push</h4>
+          <table>
+            <thead><tr><th>Equipment</th><th>Exercise 1</th><th>Exercise 2</th></tr></thead>
+            <tbody>
+              <tr><td>Machine</td><td>Leg Press</td><td>Chest Press</td></tr>
+              <tr><td>Dumbbells</td><td>Goblet Squat</td><td>DB Floor Press</td></tr>
+              <tr><td>Barbell</td><td>Back Squat</td><td>Bench Press</td></tr>
+            </tbody>
+          </table>
+          <h4>Block 2 — Hip Hinge + Upper Pull</h4>
+          <table>
+            <thead><tr><th>Equipment</th><th>Exercise 1</th><th>Exercise 2</th></tr></thead>
+            <tbody>
+              <tr><td>Machine</td><td>Hip Thrust Machine</td><td>Lat Pulldown</td></tr>
+              <tr><td>Dumbbells</td><td>DB Hip Thrust</td><td>DB Row</td></tr>
+              <tr><td>Barbell</td><td>Barbell Hip Thrust</td><td>Barbell Row</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-6 equipment-card">
+          <h3>Strength B</h3>
+          <h4>Block 1 — Hinge + Vertical Push</h4>
+          <table>
+            <thead><tr><th>Equipment</th><th>Exercise 1</th><th>Exercise 2</th></tr></thead>
+            <tbody>
+              <tr><td>Machine</td><td>Back Extension</td><td>Shoulder Press Machine</td></tr>
+              <tr><td>Dumbbells</td><td>DB Romanian Deadlift</td><td>DB Overhead Press</td></tr>
+              <tr><td>Barbell</td><td>Deadlift</td><td>Barbell Overhead Press</td></tr>
+            </tbody>
+          </table>
+          <h4>Block 2 — Hamstrings + Pull</h4>
+          <table>
+            <thead><tr><th>Equipment</th><th>Exercise 1</th><th>Exercise 2</th></tr></thead>
+            <tbody>
+              <tr><td>Machine</td><td>Leg Curl</td><td>Seated Row</td></tr>
+              <tr><td>Dumbbells</td><td>DB RDL, lighter</td><td>DB Row</td></tr>
+              <tr><td>Barbell</td><td>Good Morning, light</td><td>Barbell Row</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-12">
+          <h3>Quick Swap Logic</h3>
+          <table>
+            <thead><tr><th>If This Is Busy</th><th>Use This</th><th>Keep In Mind</th></tr></thead>
+            <tbody>
+              <tr><td>Leg Press</td><td>Goblet Squat or Back Squat</td><td>Use lower load than machine; focus on depth and control.</td></tr>
+              <tr><td>Chest Press</td><td>DB Floor Press</td><td>No bench needed; control the bottom position.</td></tr>
+              <tr><td>Lat Pulldown</td><td>DB Row or Barbell Row</td><td>Different angle, same pulling pattern.</td></tr>
+              <tr><td>Hip Thrust Setup</td><td>DB Hip Thrust or RDL</td><td>Choose RDL if setup is difficult, but do not overload hinge volume.</td></tr>
+              <tr><td>Leg Curl</td><td>DB RDL</td><td>Not the same isolation, but good hamstring substitute.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="guide" class="page-section">
+      <div class="section-title">
+        <div>
+          <h2>Exercise Guide</h2>
+          <p>Only exercises used in this program. Search or browse by muscle group; exercises are alphabetical inside each group.</p>
+        </div>
+      </div>
+
+      <div class="card span-12">
+        <input id="exerciseSearch" class="search-box" type="search" placeholder="Search exercise, equipment, muscle group, cue, or warning…" oninput="filterExerciseGuide()" />
+
+        <div class="guide-group" data-group="core">
+          <h3>Core <span class="group-tag">Alphabetical</span></h3>
+          <table class="exercise-table">
+            <thead><tr><th>Exercise</th><th>Equipment</th><th>Description</th><th>Pay Attention To</th><th>Avoid</th></tr></thead>
+            <tbody>
+              <tr><td>Cable Crunch</td><td><span class="equipment-label">Machine / Cable</span></td><td>Weighted abdominal flexion.</td><td>Round through abs, keep hips stable.</td><td>Pulling with arms only.</td></tr>
+              <tr><td>Knee Raises</td><td><span class="equipment-label">Bodyweight</span></td><td>Core flexion exercise.</td><td>Controlled knees up, slow lowering.</td><td>Swinging.</td></tr>
+              <tr><td>Plank</td><td><span class="equipment-label">Bodyweight</span></td><td>Core anti-extension hold.</td><td>Straight line, ribs down, glutes lightly engaged.</td><td>Dropping hips.</td></tr>
+              <tr><td>Side Plank</td><td><span class="equipment-label">Bodyweight</span></td><td>Core anti-lateral-flexion hold.</td><td>Hips high, body aligned.</td><td>Letting hips drop.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="guide-group" data-group="lower body">
+          <h3>Lower Body <span class="group-tag">Alphabetical</span></h3>
+          <table class="exercise-table">
+            <thead><tr><th>Exercise</th><th>Equipment</th><th>Description</th><th>Pay Attention To</th><th>Avoid</th></tr></thead>
+            <tbody>
+              <tr><td>Back Extension</td><td><span class="equipment-label">Machine</span></td><td>Posterior-chain hinge alternative used in Strength B.</td><td>Move from hips, keep spine neutral, squeeze glutes at top.</td><td>Hyperextending the lower back.</td></tr>
+              <tr><td>Back Squat</td><td><span class="equipment-label">Barbell</span></td><td>Barbell lower-body compound lift.</td><td>Brace core, controlled descent, stable knees.</td><td>Rushing depth or losing spinal position.</td></tr>
+              <tr><td>DB Hip Thrust</td><td><span class="equipment-label">Dumbbells</span></td><td>Dumbbell-loaded glute bridge / hip thrust option.</td><td>Full lockout, ribs down, glute squeeze at top.</td><td>Overextending lower back.</td></tr>
+              <tr><td>DB Romanian Deadlift</td><td><span class="equipment-label">Dumbbells</span></td><td>Dumbbell hamstring-focused hip hinge.</td><td>Move hips back, feel hamstring stretch, slight knee bend.</td><td>Turning it into a squat.</td></tr>
+              <tr><td>Deadlift</td><td><span class="equipment-label">Barbell</span></td><td>Heavy hip hinge pulling movement.</td><td>Neutral spine, bar close, push floor away.</td><td>Rounding back or pulling with arms.</td></tr>
+              <tr><td>Goblet Squat</td><td><span class="equipment-label">Dumbbells</span></td><td>Dumbbell squat held in front of the chest.</td><td>Upright torso, stable feet, controlled depth.</td><td>Collapsing knees or leaning too far forward.</td></tr>
+              <tr><td>Good Morning</td><td><span class="equipment-label">Barbell</span></td><td>Light barbell hinge variation.</td><td>Use light load, brace core, hinge slowly.</td><td>Going heavy or rounding back.</td></tr>
+              <tr><td>Hip Thrust Machine</td><td><span class="equipment-label">Machine</span></td><td>Machine glute-dominant hip extension.</td><td>Full lockout, ribs down, glute squeeze at top.</td><td>Overextending lower back.</td></tr>
+              <tr><td>Barbell Hip Thrust</td><td><span class="equipment-label">Barbell</span></td><td>Barbell-loaded glute-dominant hip extension.</td><td>Full lockout, ribs down, glute squeeze at top.</td><td>Overextending lower back.</td></tr>
+              <tr><td>Leg Curl</td><td><span class="equipment-label">Machine</span></td><td>Machine hamstring isolation.</td><td>Controlled curl and slow return.</td><td>Jerking the weight.</td></tr>
+              <tr><td>Leg Press</td><td><span class="equipment-label">Machine</span></td><td>Machine-based lower-body press/squat pattern.</td><td>Push through heels, knees tracking with toes, full controlled range.</td><td>Hard knee lockout or bouncing at the bottom.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="guide-group" data-group="upper body pull">
+          <h3>Upper Body Pull <span class="group-tag">Alphabetical</span></h3>
+          <table class="exercise-table">
+            <thead><tr><th>Exercise</th><th>Equipment</th><th>Description</th><th>Pay Attention To</th><th>Avoid</th></tr></thead>
+            <tbody>
+              <tr><td>Barbell Row</td><td><span class="equipment-label">Barbell</span></td><td>Barbell horizontal pull.</td><td>Hip hinge position, brace, pull to torso.</td><td>Jerking the bar or rounding back.</td></tr>
+              <tr><td>DB Row</td><td><span class="equipment-label">Dumbbells</span></td><td>Dumbbell horizontal pull.</td><td>Pull elbow toward hip, control the eccentric.</td><td>Twisting torso excessively.</td></tr>
+              <tr><td>Lat Pulldown</td><td><span class="equipment-label">Machine</span></td><td>Vertical pulling movement.</td><td>Pull to upper chest, elbows down, controlled return.</td><td>Pulling behind the neck.</td></tr>
+              <tr><td>Seated Row</td><td><span class="equipment-label">Machine</span></td><td>Machine horizontal pulling movement.</td><td>Squeeze shoulder blades, keep torso stable.</td><td>Using momentum or leaning back hard.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="guide-group" data-group="upper body push">
+          <h3>Upper Body Push <span class="group-tag">Alphabetical</span></h3>
+          <table class="exercise-table">
+            <thead><tr><th>Exercise</th><th>Equipment</th><th>Description</th><th>Pay Attention To</th><th>Avoid</th></tr></thead>
+            <tbody>
+              <tr><td>Barbell Overhead Press</td><td><span class="equipment-label">Barbell</span></td><td>Barbell vertical pushing movement.</td><td>Brace core, straight press path, control lockout.</td><td>Leaning back excessively.</td></tr>
+              <tr><td>Bench Press</td><td><span class="equipment-label">Barbell</span></td><td>Barbell horizontal press.</td><td>Shoulder blades stable, controlled bar path.</td><td>Overarching or bouncing the bar.</td></tr>
+              <tr><td>Chest Press</td><td><span class="equipment-label">Machine</span></td><td>Machine horizontal pushing movement.</td><td>Stable shoulders, controlled press, smooth tempo.</td><td>Excessive shoulder flare or bouncing.</td></tr>
+              <tr><td>DB Floor Press</td><td><span class="equipment-label">Dumbbells</span></td><td>Dumbbell chest press performed lying on the floor.</td><td>Controlled elbows, stable wrists, pause lightly at bottom.</td><td>Crashing elbows into the floor.</td></tr>
+              <tr><td>DB Overhead Press</td><td><span class="equipment-label">Dumbbells</span></td><td>Dumbbell vertical pushing movement.</td><td>Brace core, avoid shrugging, keep wrists stacked.</td><td>Leaning back excessively.</td></tr>
+              <tr><td>Shoulder Press Machine</td><td><span class="equipment-label">Machine</span></td><td>Machine vertical pushing movement.</td><td>Controlled press, stable torso, smooth lockout.</td><td>Letting shoulders shrug aggressively.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="cheatsheet" class="page-section">
+      <div class="section-title">
+        <div>
+          <h2>Printable Cheat Sheet</h2>
+          <p>A compact version for the gym.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card span-6 callout">
+          <h3>Strength A</h3>
+          <table>
+            <thead><tr><th>Block</th><th>Do This</th><th>Target</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Lower Push + Upper Push</td><td>3×10–12</td></tr>
+              <tr><td>2</td><td>Hip Hinge + Upper Pull</td><td>3×10–12</td></tr>
+              <tr><td>Core</td><td>Plank + Knee Raises</td><td>3 sets</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-6 callout">
+          <h3>Strength B</h3>
+          <table>
+            <thead><tr><th>Block</th><th>Do This</th><th>Target</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Hinge + Vertical Push</td><td>3×8–10 / 3×12–15</td></tr>
+              <tr><td>2</td><td>Hamstrings + Pull</td><td>3×12–15</td></tr>
+              <tr><td>Core</td><td>Side Plank + Crunch</td><td>3 sets</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-8">
+          <h3>Fast Equipment Swaps</h3>
+          <table>
+            <thead><tr><th>Pattern</th><th>Machine</th><th>Dumbbells</th><th>Barbell</th></tr></thead>
+            <tbody>
+              <tr><td>Lower Push</td><td>Leg Press</td><td>Goblet Squat</td><td>Back Squat</td></tr>
+              <tr><td>Upper Push</td><td>Chest Press</td><td>DB Floor Press</td><td>Bench Press</td></tr>
+              <tr><td>Hip Hinge</td><td>Hip Thrust</td><td>DB Hip Thrust / RDL</td><td>Hip Thrust / Deadlift</td></tr>
+              <tr><td>Vertical Push</td><td>Shoulder Press</td><td>DB OHP</td><td>Barbell OHP</td></tr>
+              <tr><td>Upper Pull</td><td>Pulldown / Row</td><td>DB Row</td><td>Barbell Row</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card span-4">
+          <h3>Rest & Progression</h3>
+          <div class="rule"><span class="badge">↔</span><div><strong>Alternate</strong><br><span class="small">Exercise 1 → rest → Exercise 2 → rest → repeat.</span></div></div>
+          <div class="rule"><span class="badge">⏱</span><div><strong>Rest</strong><br><span class="small">30–60 sec between exercises. 60–90 sec between rounds.</span></div></div>
+          <div class="rule"><span class="badge">↑</span><div><strong>Progress</strong><br><span class="small">Increase when all sets hit the top rep target.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sessionlog" class="page-section">
+      <div class="section-title">
+        <div>
+          <h2>Session Log</h2>
+          <p>Read-only view of logged training sessions from the Weekly Training Tracker.</p>
+        </div>
+      </div>
+
+      <div class="card span-12">
+        <div id="sessionlog-empty" class="note" style="display: none;">
+          No sessions logged yet. Use the <a href="weekly_tracker.html">Weekly Training Tracker</a> to log workouts.
+        </div>
+        <table id="sessionlog-table" style="display: none;">
+          <thead>
+            <tr><th>Date</th><th>Session</th><th>Room</th><th>Work Completed</th><th>RPE</th><th>Result</th><th>Notes</th></tr>
+          </thead>
+          <tbody id="sessionlog-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../tracker-sync.js" data-tracker-key="weekly-training" data-single-key="weeklyTrainingTracker.v3"></script>
+  <script>
+    function showPage(pageId, button) {
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      if (button) {
+        button.classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterExerciseGuide() {
+      const searchInput = document.getElementById('exerciseSearch');
+      if (!searchInput) return;
+
+      const query = searchInput.value.toLowerCase().trim();
+      const groups = document.querySelectorAll('#guide .guide-group');
+
+      groups.forEach(group => {
+        let visibleRows = 0;
+        const groupText = group.dataset.group || '';
+        const rows = group.querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+          const rowText = (groupText + ' ' + row.innerText).toLowerCase();
+          const isVisible = !query || rowText.includes(query);
+          row.style.display = isVisible ? '' : 'none';
+          if (isVisible) visibleRows += 1;
+        });
+
+        group.style.display = visibleRows > 0 ? '' : 'none';
+      });
+    }
+
+    function applyPercentageClass(cell, percentageValue) {
+      if (!cell) return;
+      cell.classList.remove('pct-low', 'pct-ideal', 'pct-hypertrophy', 'pct-heavy');
+
+      if (isNaN(percentageValue)) return;
+
+      if (percentageValue < 60) {
+        cell.classList.add('pct-low');
+      } else if (percentageValue <= 70) {
+        cell.classList.add('pct-ideal');
+      } else if (percentageValue <= 80) {
+        cell.classList.add('pct-hypertrophy');
+      } else {
+        cell.classList.add('pct-heavy');
+      }
+    }
+
+    function calculatePercentages() {
+      document.querySelectorAll('#reference tbody tr').forEach(row => {
+        const oneRM = parseFloat(row.dataset.oneRm);
+        const working = parseFloat(row.children[2]?.innerText || '');
+        const lastUsedCell = row.querySelector('.last-used');
+        const lastUsed = parseFloat(lastUsedCell?.innerText || '');
+        const workingPctCell = row.querySelector('.calc-working');
+        const lastPctCell = row.querySelector('.calc-last');
+        const highestCell = row.querySelector('.highest');
+        const highestPctCell = row.querySelector('.calc-highest');
+        const highest = parseFloat(highestCell?.innerText || '');
+
+        if (workingPctCell) {
+          const workingPct = (!isNaN(oneRM) && !isNaN(working)) ? Math.round((working / oneRM) * 100) : NaN;
+          workingPctCell.innerText = !isNaN(workingPct) ? workingPct + '%' : '';
+          applyPercentageClass(workingPctCell, workingPct);
+        }
+
+        if (lastPctCell) {
+          const lastPct = (!isNaN(oneRM) && !isNaN(lastUsed)) ? Math.round((lastUsed / oneRM) * 100) : NaN;
+          lastPctCell.innerText = !isNaN(lastPct) ? lastPct + '%' : '';
+          applyPercentageClass(lastPctCell, lastPct);
+        }
+
+        if (highestPctCell) {
+          const highestPct = (!isNaN(oneRM) && !isNaN(highest)) ? Math.round((highest / oneRM) * 100) : NaN;
+          highestPctCell.innerText = !isNaN(highestPct) ? highestPct + '%' : '';
+          applyPercentageClass(highestPctCell, highestPct);
+        }
+      });
+    }
+
+    /**
+     * Safely reads and parses the weeklyTrainingTracker.v3 localStorage key.
+     * Returns an empty array on failure (null, undefined, malformed JSON).
+     */
+    function getSessionData() {
+      try {
+        const raw = localStorage.getItem('weeklyTrainingTracker.v3');
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        return parsed;
+      } catch (e) {
+        console.warn('getSessionData: failed to parse session data from localStorage', e);
+        return [];
+      }
+    }
+
+    /**
+     * Computes per-exercise weight stats from session data.
+     * Returns an object keyed by exercise name with { lastUsed, highest } values.
+     * - lastUsed: weight from the most recent session containing that exercise
+     * - highest: maximum weight ever logged for that exercise
+     * Returns null values (displayed as "—") when no data exists.
+     */
+    function computeWeightStats(sessions) {
+      if (!sessions || !Array.isArray(sessions) || sessions.length === 0) {
+        return {};
+      }
+
+      const stats = {};
+
+      // Sort sessions by date descending to determine "most recent" per exercise
+      const sorted = sessions
+        .filter(s => s && typeof s === 'object' && s.date)
+        .sort((a, b) => {
+          if (a.date > b.date) return -1;
+          if (a.date < b.date) return 1;
+          return 0;
+        });
+
+      for (const session of sorted) {
+        if (!session.blocks || !Array.isArray(session.blocks)) continue;
+
+        for (const block of session.blocks) {
+          if (!block || !block.exercises || !Array.isArray(block.exercises)) continue;
+
+          for (const ex of block.exercises) {
+            if (!ex || !ex.exercise || typeof ex.weight !== 'number') continue;
+
+            const name = ex.exercise;
+            const weight = ex.weight;
+
+            if (!stats[name]) {
+              // First encounter (sorted desc by date) is the most recent
+              stats[name] = { lastUsed: weight, highest: weight };
+            } else {
+              // Already have lastUsed from a more recent session; just update highest
+              if (weight > stats[name].highest) {
+                stats[name].highest = weight;
+              }
+            }
+          }
+        }
+      }
+
+      return stats;
+    }
+
+    /**
+     * Populates the "Last Used" and "Highest" columns in the 1RM Reference table
+     * using data computed by computeWeightStats().
+     */
+    function populateWeightStats(stats) {
+      if (!stats || typeof stats !== 'object') return;
+
+      document.querySelectorAll('#reference tbody tr').forEach(row => {
+        const exerciseName = row.children[0]?.innerText?.trim();
+        if (!exerciseName) return;
+
+        const lastUsedCell = row.querySelector('.last-used');
+        const highestCell = row.querySelector('.highest');
+        const exerciseStats = stats[exerciseName];
+
+        if (lastUsedCell) {
+          if (exerciseStats && exerciseStats.lastUsed != null) {
+            lastUsedCell.innerText = exerciseStats.lastUsed;
+          } else {
+            lastUsedCell.innerText = '—';
+          }
+        }
+
+        if (highestCell) {
+          if (exerciseStats && exerciseStats.highest != null) {
+            highestCell.innerText = exerciseStats.highest;
+          } else {
+            highestCell.innerText = '—';
+          }
+        }
+      });
+    }
+
+    /**
+     * Renders the session log table from session data.
+     * Displays a message when no sessions exist.
+     */
+    function renderSessionLog(sessions) {
+      const emptyMsg = document.getElementById('sessionlog-empty');
+      const table = document.getElementById('sessionlog-table');
+      const tbody = document.getElementById('sessionlog-body');
+
+      if (!sessions || !Array.isArray(sessions) || sessions.length === 0) {
+        if (emptyMsg) emptyMsg.style.display = '';
+        if (table) table.style.display = 'none';
+        return;
+      }
+
+      if (emptyMsg) emptyMsg.style.display = 'none';
+      if (table) table.style.display = '';
+      if (!tbody) return;
+
+      // Sort sessions by date descending (most recent first)
+      const sorted = [...sessions]
+        .filter(s => s && typeof s === 'object')
+        .sort((a, b) => {
+          if ((a.date || '') > (b.date || '')) return -1;
+          if ((a.date || '') < (b.date || '')) return 1;
+          return 0;
+        });
+
+      tbody.innerHTML = '';
+
+      for (const session of sorted) {
+        const row = document.createElement('tr');
+
+        // Date
+        const dateCell = document.createElement('td');
+        dateCell.textContent = session.date || '—';
+        row.appendChild(dateCell);
+
+        // Session type
+        const sessionCell = document.createElement('td');
+        sessionCell.textContent = session.session || '—';
+        row.appendChild(sessionCell);
+
+        // Room
+        const roomCell = document.createElement('td');
+        roomCell.textContent = session.room || '—';
+        row.appendChild(roomCell);
+
+        // Work Completed (summarize exercises)
+        const workCell = document.createElement('td');
+        let workSummary = '—';
+        if (session.blocks && Array.isArray(session.blocks)) {
+          const exercises = [];
+          for (const block of session.blocks) {
+            if (block && block.exercises && Array.isArray(block.exercises)) {
+              for (const ex of block.exercises) {
+                if (ex && ex.exercise) {
+                  const sets = Array.isArray(ex.sets) ? ex.sets.length : (typeof ex.sets === 'number' ? ex.sets : 0);
+                  exercises.push(ex.exercise + (ex.weight ? ' @ ' + ex.weight + 'kg' : '') + (sets ? ' × ' + sets + 's' : ''));
+                }
+              }
+            }
+          }
+          if (exercises.length > 0) {
+            workSummary = exercises.join(', ');
+          }
+        }
+        workCell.textContent = workSummary;
+        row.appendChild(workCell);
+
+        // RPE
+        const rpeCell = document.createElement('td');
+        rpeCell.textContent = session.rpe != null ? session.rpe : '—';
+        row.appendChild(rpeCell);
+
+        // Result
+        const resultCell = document.createElement('td');
+        resultCell.textContent = session.result || '—';
+        row.appendChild(resultCell);
+
+        // Notes
+        const notesCell = document.createElement('td');
+        notesCell.textContent = session.notes || '—';
+        row.appendChild(notesCell);
+
+        tbody.appendChild(row);
+      }
+    }
+
+    function runSelfTests() {
+      console.assert(typeof showPage === 'function', 'showPage should be defined');
+      console.assert(typeof filterExerciseGuide === 'function', 'filterExerciseGuide should be defined');
+      console.assert(typeof calculatePercentages === 'function', 'calculatePercentages should be defined');
+      console.assert(typeof applyPercentageClass === 'function', 'applyPercentageClass should be defined');
+      console.assert(typeof getSessionData === 'function', 'getSessionData should be defined');
+      console.assert(typeof computeWeightStats === 'function', 'computeWeightStats should be defined');
+      console.assert(typeof populateWeightStats === 'function', 'populateWeightStats should be defined');
+      console.assert(typeof renderSessionLog === 'function', 'renderSessionLog should be defined');
+
+      // Test computeWeightStats with empty/null inputs
+      console.assert(Object.keys(computeWeightStats(null)).length === 0, 'computeWeightStats(null) should return empty object');
+      console.assert(Object.keys(computeWeightStats([])).length === 0, 'computeWeightStats([]) should return empty object');
+      console.assert(Object.keys(computeWeightStats(undefined)).length === 0, 'computeWeightStats(undefined) should return empty object');
+
+      // Test computeWeightStats with valid data
+      const testSessions = [
+        { date: '2024-01-10', session: 'Strength A', room: 'Machine', blocks: [{ exercises: [{ exercise: 'Leg Press', weight: 130, sets: [12, 12, 10] }] }], rpe: 7, result: 'Hold', notes: '' },
+        { date: '2024-01-15', session: 'Strength A', room: 'Machine', blocks: [{ exercises: [{ exercise: 'Leg Press', weight: 135, sets: [12, 12, 12] }] }], rpe: 8, result: 'Increase', notes: '' },
+        { date: '2024-01-12', session: 'Strength A', room: 'Machine', blocks: [{ exercises: [{ exercise: 'Leg Press', weight: 140, sets: [10, 10, 8] }] }], rpe: 9, result: 'Hold', notes: '' }
+      ];
+      const testStats = computeWeightStats(testSessions);
+      console.assert(testStats['Leg Press'].lastUsed === 135, 'lastUsed should be 135 (from most recent date 2024-01-15)');
+      console.assert(testStats['Leg Press'].highest === 140, 'highest should be 140 (max across all sessions)');
+
+      calculatePercentages();
+
+      const chestRow = Array.from(document.querySelectorAll('#reference tbody tr'))
+        .find(row => row.cells[0]?.innerText === 'Chest Press');
+
+      console.assert(chestRow, 'Chest Press reference row should exist');
+      if (chestRow) {
+        console.assert(chestRow.querySelector('.calc-working')?.innerText === '62%', 'Chest Press working % should calculate to 62%');
+        const lastUsedCell = chestRow.querySelector('.last-used');
+        const lastPctCell = chestRow.querySelector('.calc-last');
+        lastUsedCell.innerText = '42';
+        calculatePercentages();
+        console.assert(lastPctCell.innerText === '50%', 'Chest Press last-used % should calculate to 50% when Last Used is 42');
+        console.assert(lastPctCell.classList.contains('pct-low'), 'Chest Press 50% should be color-coded as low');
+        lastUsedCell.innerText = '';
+        calculatePercentages();
+      }
+    }
+
+    document.addEventListener('input', calculatePercentages);
+    document.addEventListener('DOMContentLoaded', () => {
+      const sessions = getSessionData();
+      const stats = computeWeightStats(sessions);
+      populateWeightStats(stats);
+      calculatePercentages();
+      renderSessionLog(sessions);
+      runSelfTests();
+    });
+  </script>
+</body>
+</html>
