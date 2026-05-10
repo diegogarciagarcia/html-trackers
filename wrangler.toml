@@ -1,7 +1,0 @@
-name = "html-trackers"
-pages_build_output_dir = "./"
-
-[[kv_namespaces]]
-binding = "TRACKER_STATE"
-id = "988b27e5e34242039ca862df143e4a39"
-
