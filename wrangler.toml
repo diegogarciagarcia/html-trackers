@@ -1,4 +1,4 @@
-name = "html-trackers-api"
+name = "html-trackers"
 main = "worker.js"
 compatibility_date = "2024-12-01"
 
