@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#17120d" name="theme-color"/>
+<title>New Orleans • Dec 4–8, 2026</title>
+<style>
+:root {
+  --bg:#f6f2ea; --card:#fffdf9; --ink:#191713; --muted:#6f675c;
+  --accent:#6f2f24; --accent2:#b8863b; --line:#ded6ca; --good:#1e6a47;
+  --warn:#9a5a13; --shadow:0 8px 24px rgba(29,22,15,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.45}
+header{padding:22px 18px 14px;background:linear-gradient(145deg,#1b1510,#342217);color:#fff;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;inset:auto -55px -80px auto;width:180px;height:180px;border-radius:50%;background:rgba(184,134,59,.18)}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#e6c48f;font-weight:700}
+h1{font-size:1.75rem;line-height:1.1;margin:.4rem 0 .35rem}
+.sub{color:#e8ded3;font-size:.96rem;max-width:560px}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 18px 4px}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 13px;box-shadow:var(--shadow)}
+.pill b{display:block;font-size:.82rem;color:var(--muted);margin-bottom:3px}
+.pill span{font-size:.95rem;font-weight:700}
+.tabs-wrap{position:sticky;top:0;z-index:20;background:rgba(246,242,234,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 0}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 14px;font-weight:750;white-space:nowrap;color:var(--ink);font-size:.9rem}
+.tab-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+main{max-width:760px;margin:0 auto;padding:16px 14px 80px}
+.panel{display:none}
+.panel.active{display:block}
+.day-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin:2px 2px 14px}
+.day-head h2{font-size:1.35rem;margin:0}
+.day-head p{margin:.2rem 0 0;color:var(--muted);font-size:.92rem}
+.badge{background:#efe4d1;color:#6e4c1e;border-radius:999px;padding:7px 10px;font-size:.78rem;font-weight:800;white-space:nowrap}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin:0 0 12px;box-shadow:var(--shadow)}
+.time{font-size:.77rem;color:var(--accent);font-weight:850;letter-spacing:.04em;text-transform:uppercase}
+.card h3{font-size:1.03rem;margin:4px 0 7px}
+.card p{margin:0;color:#4e4943;font-size:.94rem}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+a.btn{text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--ink);padding:8px 11px;border-radius:11px;font-size:.86rem;font-weight:750}
+a.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.food{margin-top:9px;padding:9px 11px;background:#f5eee3;border-radius:12px;font-size:.9rem}
+.food b{color:#7b4a1f}
+.note{background:#f0eadf;border-left:4px solid var(--accent2);padding:12px 13px;border-radius:12px;margin:12px 0;font-size:.92rem}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{margin-top:4px;accent-color:var(--accent);transform:scale(1.15)}
+.status{font-size:.74rem;font-weight:850;padding:4px 8px;border-radius:999px;display:inline-block;margin-left:5px}
+.done{background:#e2f2e8;color:var(--good)}
+.todo{background:#fff0d7;color:var(--warn)}
+.optional{background:#ece8f7;color:#604f8d}
+.grid2{display:grid;grid-template-columns:1fr;gap:10px}
+.small{font-size:.84rem;color:var(--muted)}
+.footer{color:var(--muted);text-align:center;font-size:.78rem;padding:18px}
+@media(min-width:650px){
+  .quick{max-width:760px;margin:0 auto;grid-template-columns:repeat(4,1fr)}
+  .grid2{grid-template-columns:1fr 1fr}
+  header{padding-top:30px;padding-bottom:22px}
+  h1{font-size:2.15rem}
+}
+
+.cue{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 8px;font-size:.72rem;font-weight:900;letter-spacing:.02em;margin-left:6px;vertical-align:middle}
+.cue-book{background:#fde8df;color:#8a3f25}
+.cue-top5{background:#e6f3ea;color:#1f6847}
+.cue-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+
+.cue-day{background:#e7edf8;color:#2f568c}
+.cue-alt{background:#f0ece8;color:#6d6258}
+.cue-option{background:#eee9f8;color:#5e4b88}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">Fast New Orleans trip</div>
+<h1>New Orleans • 4–8 Dec 2026</h1>
+<div class="sub">Mobile-first itinerary built around food, live music, the Saints game, and a short first visit without renting a car.</div>
+</header>
+<section class="quick">
+<div class="pill"><b>Arrive</b><span>Fri 4 • 15:30</span></div>
+<div class="pill"><b>Leave MSY</b><span>Tue 8 • 13:42</span></div>
+<div class="pill"><b>Big event</b><span>Saints vs Packers</span></div>
+<div class="pill"><b>Transport</b><span>Walk + streetcar + rideshare</span></div>
+</section>
+<div class="tabs-wrap">
+<nav aria-label="Trip days" class="tabs">
+<button class="tab-btn active" data-tab="fri">Fri 4</button>
+<button class="tab-btn" data-tab="sat">Sat 5</button>
+<button class="tab-btn" data-tab="sun">Sun 6</button>
+<button class="tab-btn" data-tab="mon">Mon 7</button>
+<button class="tab-btn" data-tab="tue">Tue 8</button>
+<button class="tab-btn" data-tab="food">Food list</button>
+</nav>
+</div>
+<main>
+<section class="panel active" id="fri">
+<div class="day-head"><div><h2>Friday 4</h2><p>Arrival + easy introduction</p></div><span class="badge">Keep it light</span></div>
+<div class="card"><div class="time">10:06 AM–3:30 PM</div><h3>Frontier 1708 • LAS → MSY</h3><div class="cue-row"><span class="cue cue-top5">✓ FLIGHT BOOKED</span></div><p>Depart Las Vegas at 10:06 AM and arrive New Orleans at 3:30 PM.</p></div>
+<div class="card"><div class="time">~4:30–5:00 PM onward</div><h3>Check in + French Quarter orientation</h3><p>After landing at 3:30 PM, allow time for baggage and the ride into the city. Check in, then do an easy Jackson Square → Royal Street → Mississippi riverfront walk.</p>
+<div class="actions"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Jackson%20Square%20701%20Decatur%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Jackson Square</a></div>
+</div>
+<div class="card"><div class="time">Dinner</div><h3>Mr. B's Bistro</h3><div class="cue-row"><span class="cue cue-top5">★ TOP 5 FOOD</span><span class="cue cue-book">⚠ RESERVE</span></div><p>Excellent first-night classic New Orleans meal.</p>
+<div class="food"><b>Order:</b> BBQ shrimp + gumbo.</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Mr.%20B%27s%20Bistro%20201%20Royal%20St%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Maps</a></div>
+</div>
+<div class="card"><div class="time">After dinner</div><h3>Bourbon Street once, then jazz</h3><div class="cue-row"><span class="cue cue-book">⚠ BOOK OPTIONAL</span></div><p>See Bourbon briefly, then move on. If energy allows, finish with Preservation Hall.</p>
+<div class="actions"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Preservation%20Hall%20726%20St%20Peter%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Preservation Hall</a></div>
+</div>
+</section>
+<section class="panel" id="sat">
+<div class="day-head"><div><h2>Saturday 5</h2><p>French Quarter + food + live music</p></div><span class="badge">Big atmosphere day</span></div>
+<div class="card"><div class="time">Breakfast</div><h3>Café Du Monde – French Market</h3><div class="cue-row"><span class="cue cue-top5">★ TOP 5 FOOD</span></div><p>Use the original French Market location.</p>
+<div class="food"><b>Order:</b> Beignets + café au lait.</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Cafe%20Du%20Monde%20French%20Market%20800%20Decatur%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Maps</a></div>
+</div>
+<div class="card"><div class="time">Morning</div><h3>French Market + Royal Street</h3><p>Slow walk through the Quarter. Prioritise architecture, galleries and street music over spending hours on Bourbon.</p></div>
+<div class="card"><div class="time">Lunch</div><h3>Central Grocery &amp; Deli</h3><div class="cue-row"><span class="cue cue-top5">★ TOP 5 FOOD</span></div><p>Quick, iconic lunch stop.</p>
+<div class="food"><b>Order:</b> Muffuletta.</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Central%20Grocery%20%26%20Deli%20923%20Decatur%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Maps</a></div>
+</div>
+<div class="card"><div class="time">Afternoon</div><h3>Christmas-season events / free wandering</h3><p>Keep this flexible around the December 5 parade activity and street closures.</p></div>
+<div class="card"><div class="time">6:00–6:30 PM</div><h3>Dinner • Paladar 511</h3><div class="cue-row"><span class="cue cue-day">SAT • PLANNED</span><span class="cue cue-book">⚠ RESERVE</span></div><p>A strong pre-Frenchmen dinner in Marigny: modern, lively, and different from the classic Creole meals elsewhere in the trip.</p><div class="food"><b>Order:</b> Housemade pasta, pizza, Gulf seafood; choose whatever looks best that night.</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Paladar%20511%20511%20Marigny%20St%2C%20New%20Orleans%2C%20LA%2070117" target="_blank">Open in Maps</a></div></div><div class="card"><div class="time">Night</div><h3>Frenchmen Street</h3><p>Make this your main music night. Walk venue-to-venue and choose what sounds best rather than locking the whole evening to one club.</p>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Frenchmen%20Street%20Frenchmen%20St%2C%20New%20Orleans%2C%20LA" target="_blank">Open in Maps</a></div>
+</div>
+</section>
+<section class="panel" id="sun">
+<div class="day-head"><div><h2>Sunday 6</h2><p>Saints game day</p></div><span class="badge">Main event</span></div>
+<div class="card"><div class="time">7:30–8:30 AM</div><h3>Breakfast • Ruby Slipper CBD</h3><div class="cue-row"><span class="cue cue-day">SUN • PLANNED</span><span class="cue cue-book">⏱ GO EARLY</span></div><p>Game-day breakfast downtown. Go early so you are not fighting the Sunday brunch rush, then head back / toward the Superdome with plenty of time.</p><div class="food"><b>Order:</b> Southern breakfast: biscuits, eggs Benedict, shrimp &amp; grits or pancakes.</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Ruby%20Slipper%20CBD%20200%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Maps</a></div></div><div class="card"><div class="time">~09:30–10:00</div><h3>Head toward the Superdome</h3><p>Enjoy the pre-game atmosphere around the stadium. No car needed from central New Orleans.</p>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Caesars%20Superdome%201500%20Sugar%20Bowl%20Dr%2C%20New%20Orleans%2C%20LA%2070112" target="_blank">Open stadium in Maps</a></div>
+</div>
+<div class="card"><div class="time">12:00–~15:15</div><h3>New Orleans Saints vs Green Bay Packers</h3><p>An NFL game usually takes about 3–3½ hours in real time. Allow until around 16:00 for getting out of the stadium and crowds.</p></div>
+<div class="card"><div class="time">Late afternoon</div><h3>Po'boy after the game</h3><div class="cue-row"><span class="cue cue-top5">★ TOP 5 FOOD</span></div><p>If you're hungry and don't mind a rideshare, Parkway is a strong post-game target.</p>
+<div class="food"><b>Order:</b> Fried shrimp po’boy or roast beef debris po’boy.</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Parkway%20Bakery%20%26%20Tavern%20538%20Hagan%20Ave%2C%20New%20Orleans%2C%20LA%2070119" target="_blank">Open in Maps</a></div>
+</div>
+<div class="card"><div class="time">Evening</div><h3>Easy dinner / cocktails</h3><p>Keep Sunday night relaxed after the game. Save your energy for Monday.</p></div>
+</section>
+<section class="panel" id="mon">
+<div class="day-head"><div><h2>Monday 7</h2><p>Your choice: museum-heavy or neighborhood-heavy</p></div><span class="badge">Flexible</span></div>
+<div class="card"><div class="time">7:30–8:30 AM</div><h3>Breakfast • Willa Jean</h3><div class="cue-row"><span class="cue cue-day">MON • PLANNED</span></div><p>Easy downtown breakfast before the WWII Museum or a neighborhood-focused Monday. It opens early and works well with either version of the day.</p><div class="food"><b>Order:</b> Biscuits, pastries and Southern breakfast plates.</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Willa%20Jean%20611%20O%27Keefe%20Ave%2C%20New%20Orleans%2C%20LA%2070113" target="_blank">Open in Maps</a></div></div><div class="card"><div class="time">Option A • Morning–afternoon</div><h3>The National WWII Museum</h3><div class="cue-row"><span class="cue cue-book">⚠ ADVANCE TICKET OPTIONAL</span></div><p>Best if you enjoy history. Give it 4–5 hours rather than rushing through.</p>
+<div class="actions"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=The%20National%20WWII%20Museum%20945%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Maps</a></div>
+</div>
+<div class="card"><div class="time">Option B • Lunch / afternoon</div><h3>Dooky Chase's + Tremé</h3><div class="cue-row"><span class="cue cue-top5">★ TOP 5 FOOD</span><span class="cue cue-book">⚠ RESERVE</span></div><p>Choose this instead if food + local history matters more than the museum.</p>
+<div class="food"><b>Order:</b> Gumbo, fried chicken, red beans &amp; rice.</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Dooky%20Chase%27s%20Restaurant%202301%20Orleans%20Ave%2C%20New%20Orleans%2C%20LA%2070119" target="_blank">Open in Maps</a></div>
+</div>
+<div class="card"><div class="time">Final dinner</div><h3>Cochon or Commander's Palace</h3><div class="cue-row"><span class="cue cue-book">⚠ RESERVE DINNER</span></div><p><b>Cochon:</b> more casual Louisiana/Cajun energy. <b>Commander's:</b> more formal, classic New Orleans splurge.</p>
+<div class="actions">
+<a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Cochon%20Restaurant%20930%20Tchoupitoulas%20St%2C%20Suite%20A%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Cochon</a>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Commander%27s%20Palace%201403%20Washington%20Ave%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Commander's</a>
+</div>
+</div>
+<div class="card"><div class="time">After dinner</div><h3>Final jazz / live music</h3><p>Return to Frenchmen Street or use Preservation Hall if you booked a set.</p></div>
+</section>
+<section class="panel" id="tue">
+<div class="day-head"><div><h2>Tuesday 8</h2><p>Departure day</p></div><span class="badge">Keep simple</span></div>
+<div class="card"><div class="time">08:00–10:00</div><h3>Breakfast + final Quarter walk</h3><p>No timed attraction. Pick up anything you want to take home and stay close to the hotel.</p></div>
+<div class="card"><div class="time">10:30–10:45</div><h3>Leave for MSY</h3><p>Build in comfortable airport time for your 13:42 departure.</p></div>
+<div class="card"><div class="time">13:42</div><h3>AA1211 • MSY → PHL</h3><p>Arrives 17:32. Connection time: 2h08.</p></div>
+<div class="card"><div class="time">19:40</div><h3>AA740 • PHL → MAD</h3><p>Arrives Madrid 08:55 the next morning.</p></div>
+</section>
+<section class="panel" id="food">
+<div class="day-head"><div><h2>Food list</h2><p>Exact branches / addresses to save.</p></div><span class="badge">Google Maps-ready</span></div><div class="card food-legend">Badge guide: <span class="cue cue-day">DAY • PLANNED</span> <span class="cue cue-option">DAY • OPTION</span> <span class="cue cue-alt">ALTERNATIVE</span> <span class="cue cue-top5">★ TOP 5</span> </div>
+<div class="grid2">
+<div class="card">
+<h3>Cafe Du Monde – French Market</h3>
+<p>800 Decatur St, New Orleans, LA 70116</p>
+<div class="food"><b>Try:</b> Beignets + café au lait</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Cafe%20Du%20Monde%20%E2%80%93%20French%20Market%20800%20Decatur%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Central Grocery &amp; Deli</h3><div class="cue-row"><span class="cue cue-day">SAT • PLANNED</span><span class="cue cue-top5">★ TOP 5</span></div>
+<p>923 Decatur St, New Orleans, LA 70116</p>
+<div class="food"><b>Try:</b> Muffuletta</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Central%20Grocery%20%26%20Deli%20923%20Decatur%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Mr. B's Bistro</h3><div class="cue-row"><span class="cue cue-day">FRI • PLANNED</span><span class="cue cue-top5">★ TOP 5</span><span class="cue cue-book">⚠ RESERVE</span></div>
+<p>201 Royal St, New Orleans, LA 70130</p>
+<div class="food"><b>Try:</b> BBQ shrimp + gumbo</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Mr.%20B%27s%20Bistro%20201%20Royal%20St%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Parkway Bakery &amp; Tavern</h3><div class="cue-row"><span class="cue cue-day">SUN • PLANNED</span><span class="cue cue-top5">★ TOP 5</span></div>
+<p>538 Hagan Ave, New Orleans, LA 70119</p>
+<div class="food"><b>Try:</b> Fried shrimp or roast beef debris po’boy</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Parkway%20Bakery%20%26%20Tavern%20538%20Hagan%20Ave%2C%20New%20Orleans%2C%20LA%2070119" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Dooky Chase's Restaurant</h3><div class="cue-row"><span class="cue cue-option">MON • OPTION</span><span class="cue cue-top5">★ TOP 5</span><span class="cue cue-book">⚠ RESERVE</span></div>
+<p>2301 Orleans Ave, New Orleans, LA 70119</p>
+<div class="food"><b>Try:</b> Gumbo, fried chicken, red beans &amp; rice</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Dooky%20Chase%27s%20Restaurant%202301%20Orleans%20Ave%2C%20New%20Orleans%2C%20LA%2070119" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Cochon Restaurant</h3><div class="cue-row"><span class="cue cue-option">MON • DINNER OPTION</span></div>
+<p>930 Tchoupitoulas St, Suite A, New Orleans, LA 70130</p>
+<div class="food"><b>Try:</b> Boudin, pork, Gulf seafood</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Cochon%20Restaurant%20930%20Tchoupitoulas%20St%2C%20Suite%20A%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Commander's Palace</h3><div class="cue-row"><span class="cue cue-option">MON • DINNER OPTION</span><span class="cue cue-book">⚠ RESERVE</span></div>
+<p>1403 Washington Ave, New Orleans, LA 70130</p>
+<div class="food"><b>Try:</b> Classic Creole splurge meal</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Commander%27s%20Palace%201403%20Washington%20Ave%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Acme Oyster House</h3><div class="cue-row"><span class="cue cue-alt">ALTERNATIVE</span></div>
+<p>724 Iberville St, New Orleans, LA 70130</p>
+<div class="food"><b>Try:</b> Chargrilled oysters</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Acme%20Oyster%20House%20724%20Iberville%20St%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card">
+<h3>Drago's – Hilton Riverside</h3><div class="cue-row"><span class="cue cue-alt">ALTERNATIVE</span></div>
+<p>2 Poydras St, New Orleans, LA 70112</p>
+<div class="food"><b>Try:</b> Charbroiled oysters</div>
+<div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Drago%27s%20%E2%80%93%20Hilton%20Riverside%202%20Poydras%20St%2C%20New%20Orleans%2C%20LA%2070112" target="_blank">Open in Google Maps</a></div>
+</div>
+<div class="card"><h3>Paladar 511</h3><div class="cue-row"><span class="cue cue-day">SAT • PLANNED</span><span class="cue cue-book">⚠ RESERVE</span></div><p>511 Marigny St, New Orleans, LA 70117</p><div class="food"><b>Try:</b> Housemade pasta, pizza, Gulf seafood</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Paladar%20511%20511%20Marigny%20St%2C%20New%20Orleans%2C%20LA%2070117" target="_blank">Open in Google Maps</a></div></div><div class="card"><h3>Ruby Slipper CBD</h3><div class="cue-row"><span class="cue cue-day">SUN • PLANNED</span></div><p>200 Magazine St, New Orleans, LA 70130</p><div class="food"><b>Try:</b> Biscuits, eggs Benedict, shrimp &amp; grits or pancakes</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Ruby%20Slipper%20CBD%20200%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070130" target="_blank">Open in Google Maps</a></div></div><div class="card"><h3>Willa Jean</h3><div class="cue-row"><span class="cue cue-day">MON • PLANNED</span></div><p>611 O'Keefe Ave, New Orleans, LA 70113</p><div class="food"><b>Try:</b> Biscuits, pastries, Southern breakfast plates</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Willa%20Jean%20611%20O%27Keefe%20Ave%2C%20New%20Orleans%2C%20LA%2070113" target="_blank">Open in Google Maps</a></div></div><div class="card"><h3>Wakin' Bakin'</h3><div class="cue-row"><span class="cue cue-alt">SUN BREAKFAST • ALTERNATIVE</span></div><p>900 Dumaine St, New Orleans, LA 70116</p><div class="food"><b>Try:</b> Casual breakfast / brunch</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Wakin%27%20Bakin%27%20900%20Dumaine%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Google Maps</a></div></div><div class="card"><h3>Two Chicks Café – CBD</h3><div class="cue-row"><span class="cue cue-alt">SUN BREAKFAST • ALTERNATIVE</span></div><p>920 Gravier St, New Orleans, LA 70112</p><div class="food"><b>Try:</b> Breakfast plates, coffee</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Two%20Chicks%20Caf%C3%A9%20%E2%80%93%20CBD%20920%20Gravier%20St%2C%20New%20Orleans%2C%20LA%2070112" target="_blank">Open in Google Maps</a></div></div></div>
+<div class="note"><b>★ TOP 5 food stops:</b> Café Du Monde, Central Grocery, Parkway Bakery, Dooky Chase's, and Mr. B's Bistro.</div>
+</section>
+<div class="footer">New Orleans • Dec 4–8, 2026 • Built for mobile use</div>
+</main>
+<script>
+const buttons = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.panel');
+function openTab(id) {
+  panels.forEach(p => p.classList.toggle('active', p.id === id));
+  buttons.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+  history.replaceState(null, '', '#' + id);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+buttons.forEach(b => b.addEventListener('click', () => openTab(b.dataset.tab)));
+const initial = location.hash.replace('#','');
+if (initial && document.getElementById(initial)) openTab(initial); else openTab('fri');
+</script>
+</body>
+</html>
