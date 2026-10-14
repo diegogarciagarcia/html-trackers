@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2d1c14"><title>New Orleans Shopping & Souvenirs</title>
+<style>
+:root{--bg:#f7f3ec;--card:#fffdf9;--ink:#1b1815;--muted:#6e665e;--accent:#7a3d2a;--accent2:#b5894d;--line:#ded6cb;--green:#2f6a4f;--shadow:0 8px 24px rgba(35,24,16,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{padding:24px 18px 18px;background:linear-gradient(145deg,#20150f,#3b2519);color:white}.eyebrow{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:#e7c99e;font-weight:800}
+h1{font-size:1.75rem;line-height:1.1;margin:.35rem 0 .4rem}header p{margin:0;color:#eadfd6}.tabs-wrap{position:sticky;top:0;z-index:10;background:rgba(247,243,236,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 0}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:0 14px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{border:1px solid var(--line);background:white;border-radius:999px;padding:10px 14px;font-weight:800;white-space:nowrap}
+.tab.active{background:var(--accent);color:white;border-color:var(--accent)}main{max-width:760px;margin:0 auto;padding:16px 14px 72px}.panel{display:none}.panel.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px;box-shadow:var(--shadow)}.card h3{margin:0 0 7px;font-size:1.02rem}.card p{margin:0;color:#504a44;font-size:.94rem}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.badge{display:inline-flex;border-radius:999px;padding:5px 8px;font-size:.72rem;font-weight:900}.must{background:#e6f3ea;color:var(--green)}.top{background:#f5ead8;color:#7b5423}.option{background:#ece8f6;color:#645385}.day{background:#e7eef8;color:#375a87}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}a.btn{text-decoration:none;border:1px solid var(--line);background:white;color:var(--ink);padding:8px 11px;border-radius:11px;font-size:.86rem;font-weight:800}a.btn.primary{background:var(--accent);border-color:var(--accent);color:white}
+.tip{background:#f0eadf;border-left:4px solid var(--accent2);border-radius:12px;padding:12px 13px;margin:12px 0;font-size:.92rem}.grid{display:grid;grid-template-columns:1fr;gap:10px}.rank{font-size:.78rem;color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:.05em}.small{font-size:.83rem;color:var(--muted);margin-top:8px}footer{text-align:center;color:var(--muted);font-size:.78rem;padding:20px}
+@media(min-width:650px){.grid{grid-template-columns:1fr 1fr}h1{font-size:2.05rem}}
+</style></head><body>
+<header><div class="eyebrow">New Orleans • Shopping guide</div><h1>Crafts, handmade finds & souvenirs</h1><p>Focused on local makers, art, pottery, woodwork and practical souvenirs you can bring back to Spain.</p></header>
+<div class="tabs-wrap"><nav class="tabs">
+<button class="tab active" data-tab="shops">Shops & markets</button><button class="tab" data-tab="souvenirs">What to buy</button><button class="tab" data-tab="spices">Spices & food</button><button class="tab" data-tab="route">Best route</button>
+</nav></div>
+<main>
+<section id="shops" class="panel active"><div class="tip"><b>Best fit for you:</b> Frenchmen Art Bazaar on Saturday night, then a Magazine Street craft walk on Monday.</div><div class="grid">
+    <div class="card"><h3>Frenchmen Art Bazaar</h3><div class="badges"><span class="badge must">MUST</span><span class="badge day">Saturday night</span></div>
+    <p>Best overall for handmade art, jewelry, prints, pottery and small gifts.</p><div class="small">619 Frenchmen St, New Orleans, LA 70116</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Frenchmen%20Art%20Bazaar%20619%20Frenchmen%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Google Maps</a></div></div>
+    <div class="card"><h3>Zèle NOLA</h3><div class="badges"><span class="badge top">TOP</span><span class="badge day">Monday craft walk</span></div>
+    <p>Local makers, gifts, jewelry, art and home pieces.</p><div class="small">2841 Magazine St, New Orleans, LA 70115</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Z%C3%A8le%20NOLA%202841%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">Open in Google Maps</a></div></div>
+    <div class="card"><h3>Potsalot Pottery</h3><div class="badges"><span class="badge top">TOP</span><span class="badge day">Monday craft walk</span></div>
+    <p>Locally made pottery and ceramics.</p><div class="small">3818 Magazine St, New Orleans, LA 70115</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Potsalot%20Pottery%203818%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">Open in Google Maps</a></div></div>
+    <div class="card"><h3>NOLA Boards</h3><div class="badges"><span class="badge top">TOP</span><span class="badge day">Monday craft walk</span></div>
+    <p>Handcrafted wood boards and Louisiana-inspired woodwork.</p><div class="small">4228 Magazine St, New Orleans, LA 70115</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=NOLA%20Boards%204228%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">Open in Google Maps</a></div></div>
+    <div class="card"><h3>The Bead Shop</h3><div class="badges"><span class="badge option">OPTION</span><span class="badge day">Monday craft walk</span></div>
+    <p>Beads, jewelry-making materials and craft supplies.</p><div class="small">4612 Magazine St, New Orleans, LA 70115</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=The%20Bead%20Shop%204612%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">Open in Google Maps</a></div></div>
+    <div class="card"><h3>Dark Matter Oddities & Artisan Collective</h3><div class="badges"><span class="badge option">OPTION</span><span class="badge day">French Quarter</span></div>
+    <p>Unusual artisan pieces, curiosities and alternative handmade goods.</p><div class="small">822 Chartres St, New Orleans, LA 70116</div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Dark%20Matter%20Oddities%20%26%20Artisan%20Collective%20822%20Chartres%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Google Maps</a></div></div></div></section>
+<section id="souvenirs" class="panel"><div class="tip"><b>If you buy only five:</b> handmade pottery, a local art print, chicory coffee, filé powder, and one small handmade jewelry or wood piece.</div><div class="grid"><div class="card"><div class="rank">Best keepsake</div><h3>Handmade pottery / ceramic tile</h3><p>Look for local studio pieces and New Orleans architectural motifs.</p></div><div class="card"><div class="rank">Easy to pack</div><h3>Local art print / linocut</h3><p>Jazz, French Quarter architecture, streetcars, Mardi Gras or shotgun houses.</p></div><div class="card"><div class="rank">Small + personal</div><h3>Handmade jewelry</h3><p>Silver, brass, beadwork or locally designed pieces.</p></div><div class="card"><div class="rank">Distinctive gift</div><h3>Woodwork</h3><p>Cutting boards, serving boards or small decorative pieces.</p></div><div class="card"><div class="rank">Classic edible souvenir</div><h3>Pralines</h3><p>Choose boxed or individually wrapped pieces.</p></div><div class="card"><div class="rank">Very New Orleans</div><h3>Chicory coffee</h3><p>A practical souvenir if you drink coffee at home.</p></div><div class="card"><div class="rank">Most distinctive spice</div><h3>Filé powder</h3><p>Ground sassafras leaf, traditionally used in gumbo.</p></div><div class="card"><div class="rank">Most useful spice</div><h3>Cajun / Creole seasoning</h3><p>Good everyday souvenir; sealed blends are easiest to pack.</p></div><div class="card"><div class="rank">Great for cooking</div><h3>Blackening seasoning</h3><p>Useful for fish, chicken and vegetables.</p></div><div class="card"><div class="rank">Louisiana-specific</div><h3>Seafood boil seasoning</h3><p>Great if you cook shrimp, crab, corn or potatoes.</p></div></div></section>
+<section id="spices" class="panel">
+<div class="card"><div class="rank">#1 most distinctive</div><h3>Filé powder</h3><p>Ground sassafras leaf used traditionally in gumbo.</p></div>
+<div class="card"><div class="rank">#2 most useful</div><h3>Cajun or Creole seasoning</h3><p>Great all-purpose blend for meat, seafood, potatoes and vegetables.</p></div>
+<div class="card"><div class="rank">#3</div><h3>Blackening seasoning</h3><p>Excellent for fish and chicken, and easy to use at home.</p></div>
+<div class="card"><div class="rank">#4</div><h3>Seafood boil seasoning</h3><p>Classic Louisiana flavor profile for shrimp, crab, corn and potatoes.</p></div>
+<div class="tip"><b>Packing tip:</b> choose sealed, commercially packaged dry spices and blends.</div>
+</section>
+<section id="route" class="panel">
+<div class="card"><div class="rank">Saturday night</div><h3>Frenchmen Street + Frenchmen Art Bazaar</h3><p>Do this while you are already out for live music. It adds almost no itinerary overhead.</p><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Frenchmen%20Art%20Bazaar%20619%20Frenchmen%20St%2C%20New%20Orleans%2C%20LA%2070116" target="_blank">Open in Maps</a></div></div>
+<div class="card"><div class="rank">Monday afternoon</div><h3>Magazine Street craft walk</h3><p>Suggested sequence: Zèle NOLA → Potsalot Pottery → NOLA Boards → The Bead Shop.</p><div class="actions">
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Z%C3%A8le%20NOLA%202841%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">Zèle</a>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=Potsalot%20Pottery%203818%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">Potsalot</a>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=NOLA%20Boards%204228%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">NOLA Boards</a>
+<a class="btn" href="https://www.google.com/maps/search/?api=1&query=The%20Bead%20Shop%204612%20Magazine%20St%2C%20New%20Orleans%2C%20LA%2070115" target="_blank">The Bead Shop</a></div></div>
+<div class="tip"><b>Skip generic souvenir stores unless something really catches your eye.</b> Your best finds will come from maker markets, pottery shops, local printmakers and small food/spice producers.</div>
+</section>
+<footer>New Orleans shopping & souvenir guide • mobile-first</footer></main>
+<script>
+const tabs=[...document.querySelectorAll('.tab')],panels=[...document.querySelectorAll('.panel')];
+function openTab(id){tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id));panels.forEach(p=>p.classList.toggle('active',p.id===id));history.replaceState(null,'','#'+id);window.scrollTo({top:0,behavior:'smooth'})}
+tabs.forEach(t=>t.addEventListener('click',()=>openTab(t.dataset.tab)));const initial=location.hash.replace('#','');if(initial&&document.getElementById(initial))openTab(initial);
+</script></body></html>
