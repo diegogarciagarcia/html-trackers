@@ -1,52 +1,47 @@
 # HTML Trackers
 
-Personal study and fitness trackers — standalone HTML files deployed on GitHub Pages with localStorage for state persistence.
-
-## Live URL
-
-Deployed via GitHub Pages (configured in the repo settings).
+Personal study, fitness, and travel trackers — standalone HTML files deployed on GitHub Pages. Each tracker saves progress to `localStorage` in the browser.
 
 ## Project Structure
 
 ```
 /
-├── .gitignore
-├── README.md
-├── build_index.py                       Generates index.html on every push (GitHub Actions)
 ├── .github/workflows/pages.yml          CI: rebuild index → deploy to GitHub Pages
-├── public/
-│   └── study/
-│       ├── aws_dea_fast_track_tracker.html    AWS Data Engineer Associate (DEA-C01)
-│       ├── aws_ml_associate_tracker.html      AWS ML Engineer Associate (MLA-C01)
-│       ├── aws_sa_associate_tracker.html      AWS Solutions Architect Associate (SAA-C03)
-│       └── dataexpert_bootcamp_tracker.html   DataExpert.io Community Bootcamp
-├── old/                                 Archived trackers (not linked from index)
-│   ├── gym_program.html
-│   └── weekly_tracker.html
-└── travel/
-    ├── new_orleans_shopping_souvenirs.html
-    └── new_orleans_trip_plan.html
+├── .nojekyll                            Tells GitHub Pages to skip Jekyll processing
+├── build_index.py                       Generates index.html on every push
+├── study/
+│   ├── aws_dea_fast_track_tracker.html  AWS Data Engineer Associate (DEA-C01)
+│   ├── aws_ml_associate_tracker.html    AWS ML Engineer Associate (MLA-C01)
+│   ├── aws_sa_associate_tracker.html    AWS Solutions Architect Associate (SAA-C03)
+│   └── dataexpert_bootcamp_tracker.html DataExpert.io Community Bootcamp
+├── travel/
+│   ├── new_orleans_shopping_souvenirs.html
+│   └── new_orleans_trip_plan.html
+└── old/                                 Archived / superseded trackers (excluded from index)
+    ├── gym_program.html
+    ├── index.html
+    └── weekly_tracker.html
 ```
 
 ## How It Works
 
 ### Storage
 
-Each tracker saves its state to **localStorage** on every change. Data persists per browser/device. There is no server-side sync — all state lives in the browser.
+Each tracker saves state to **localStorage** on every change. Data persists per browser/device — there is no server-side sync.
 
 ### Auto-generated index
 
-On every push to `main`, a GitHub Actions workflow runs `build_index.py`, which scans the repo for `*.html` files and generates a root `index.html` linking to each one. New pages appear automatically without manual edits.
+On every push to `main`, a GitHub Actions workflow runs `build_index.py`. The script walks the repo, finds all `*.html` files (skipping `index.html`, `test.html`, and directories like `.git`, `.github`, `node_modules`, and `old`), and writes a root `index.html` that links to each page grouped by folder. New HTML files appear on the site automatically — no manual edits needed.
 
 ## Deployment
 
-Push to `main` → GitHub Actions rebuilds `index.html` → deploys to GitHub Pages.
+Push to `main` → GitHub Actions runs `build_index.py` → uploads the repo root as a GitHub Pages artifact → deploys.
 
-The workflow is in `.github/workflows/pages.yml`.
+The workflow lives at `.github/workflows/pages.yml`.
 
 ## Tech Stack
 
 - **Frontend:** Standalone HTML files with inline CSS/JS (no build step, no framework)
 - **Hosting:** GitHub Pages
 - **Storage:** Browser localStorage
-- **CI:** GitHub Actions (`build_index.py` generates the index on every push)
+- **CI:** GitHub Actions (auto-generates `index.html` on every push)
