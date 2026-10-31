@@ -12,7 +12,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 # Files/dirs to skip when listing links.
 SKIP_FILES = {"index.html"}          # don't link the generated index to itself
 SKIP_NAMES = {"test.html"}           # scaffolding/test pages
-SKIP_DIRS = {".git", ".github", "functions", "node_modules"}
+SKIP_DIRS = {".git", ".github", "functions", "node_modules", "old"}
 
 
 def find_html():
