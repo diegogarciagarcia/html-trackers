@@ -10,7 +10,9 @@ Personal study, fitness, and travel trackers — standalone HTML files deployed 
 ├── .nojekyll                            Tells GitHub Pages to skip Jekyll processing
 ├── build_index.py                       Generates index.html + gallery pages on every push
 ├── study/
-│   ├── aws_dea_fast_track_tracker.html  AWS Data Engineer Associate (DEA-C01)
+│   ├── aws_dea_fast_track_tracker.html  AWS Data Engineer Associate (DEA-C01), 21-day plan
+│   ├── aws_dea_course_tracker.html      DEA-C01 course tracker, first version (estimated times)
+│   ├── aws_dea_udemy_tracker.html       DEA-C01 tracker built from the real Udemy curriculum + whitepapers
 │   ├── aws_ml_associate_tracker.html    AWS ML Engineer Associate (MLA-C01)
 │   ├── aws_sa_associate_tracker.html    AWS Solutions Architect Associate (SAA-C03)
 │   └── dataexpert_bootcamp_tracker.html DataExpert.io Community Bootcamp

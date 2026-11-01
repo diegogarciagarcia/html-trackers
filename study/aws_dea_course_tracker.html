@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AWS Data Engineer Associate (DEA-C01) Course Tracker</title>
+<style>
+  :root{--bg:#f7f8fb;--card:#fff;--text:#172033;--muted:#667085;--line:#d9dee8;--accent:#2854d8;--accent2:#eef3ff;--ok:#15803d;--warn:#b45309;--danger:#b42318;--shadow:0 10px 25px rgba(16,24,40,.08)}
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  header{position:sticky;top:0;z-index:5;background:rgba(247,248,251,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .wrap{max-width:1280px;margin:0 auto;padding:22px} h1{margin:0 0 8px;font-size:clamp(1.45rem,3vw,2.3rem)} h2{margin:0 0 14px;font-size:1.35rem} h3{margin:0 0 10px;font-size:1.05rem}.muted{color:var(--muted)}
+  .topline{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:var(--accent2);color:#173b91;font-weight:650;font-size:.88rem}
+  nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.tab{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:700}.tab.active{background:var(--accent);border-color:var(--accent);color:white}
+  main{max-width:1280px;margin:0 auto;padding:22px}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+  .span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-6{grid-column:span 6}.span-4{grid-column:span 4}.span-3{grid-column:span 3}@media(max-width:900px){.span-8,.span-6,.span-4,.span-3{grid-column:span 12}.wrap,main{padding:14px}.hide-mobile{display:none}}
+  .kpi{font-size:1.8rem;font-weight:800;margin:4px 0}.bar{height:14px;background:#e9edf5;border-radius:999px;overflow:hidden}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#2854d8,#16a34a);transition:width .25s}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:.92rem} th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top} th{text-align:left;background:#f3f5f9;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:#475467} tr:hover td{background:#fbfcff}
+  input[type="checkbox"]{width:19px;height:19px;accent-color:var(--accent)} input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#fff;color:var(--text)} textarea{width:100%;min-height:58px;resize:vertical}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn{border:0;border-radius:12px;padding:10px 13px;background:var(--accent);color:#fff;font-weight:800;cursor:pointer}.btn.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}.btn.danger{background:var(--danger)}
+  .module-title{font-weight:800}.tag{display:inline-block;font-size:.76rem;border:1px solid var(--line);border-radius:999px;padding:3px 8px;margin:2px;background:#fff}.lesson-done{text-decoration:line-through;color:var(--muted)}.small{font-size:.82rem}.right{text-align:right}.resource a{font-weight:700;color:var(--accent);text-decoration:none}.resource a:hover{text-decoration:underline}.footer{padding:22px;color:var(--muted);font-size:.82rem}.warning{color:var(--warn);font-weight:700}.ok{color:var(--ok);font-weight:800}
+  .tag.dom{background:#eef3ff;border-color:#c7d4fb;color:#173b91;font-weight:700}
+  .tag.p-high{background:#fee2e2;border-color:#fecaca;color:#991b1b;font-weight:700}
+  .tag.p-medium{background:#fef3c7;border-color:#fde68a;color:#92400e;font-weight:700}
+  .tag.p-low{background:#dcfce7;border-color:#bbf7d0;color:#166534;font-weight:700}
+  .back-nav { padding: 12px 22px; font-size: 14px; font-weight: 600; }
+  .back-nav .back-link { color: #2563eb; text-decoration: none; }
+  .back-nav .back-link:hover { text-decoration: underline; }
+  @media print { .back-nav { display: none; } }
+</style>
+</head>
+<body>
+<nav class="back-nav" aria-label="Site navigation">
+  <a href="../index.html" class="back-link">← Back to Home</a>
+</nav>
+<header>
+  <div class="wrap">
+    <div class="topline">
+      <div>
+        <h1>AWS Data Engineer Associate (DEA-C01) Course Tracker</h1>
+        <div class="muted">Topic checklist, pace planner, course structure, and official resources for the Udemy “AWS Certified Data Engineer Associate – Hands On!” course.</div>
+      </div>
+      <span class="pill">Default target: 22 Nov 2026 (21 days)</span>
+    </div>
+    <nav>
+      <button class="tab active" data-page="tracker">1. Completion tracker</button>
+      <button class="tab" data-page="structure">2. Course structure</button>
+      <button class="tab" data-page="resources">3. Best resources</button>
+    </nav>
+  </div>
+</header>
+<main>
+<section id="tracker" class="page active">
+  <div class="grid">
+    <div class="card span-12 controls">
+      <label>Target deadline <input id="deadline" type="date" value="2026-11-22"></label>
+      <label>Study days / week <input id="daysPerWeek" type="number" min="1" max="7" value="6" style="width:80px"></label>
+      <label>Practice buffer / module <input id="homeworkHours" type="number" min="0" step="0.5" value="1" style="width:90px"> h</label>
+      <button class="btn secondary" id="exportBtn">Export progress JSON</button>
+      <button class="btn secondary" id="importBtn">Import progress JSON</button>
+      <button class="btn danger" id="resetBtn">Reset</button>
+      <input id="fileInput" type="file" accept="application/json,.json" hidden>
+      <span id="jsonStatus" class="muted small" role="status" aria-live="polite"></span>
+    </div>
+    <div class="card span-3"><h3>Topics complete</h3><div class="kpi" id="lessonKpi">0 / 0</div><div class="bar"><div id="lessonBar"></div></div></div>
+    <div class="card span-3"><h3>Practice sets complete</h3><div class="kpi" id="assignKpi">0 / 0</div><div class="bar"><div id="assignBar"></div></div></div>
+    <div class="card span-3"><h3>Total workload</h3><div class="kpi" id="workloadKpi">0h</div><div class="muted small">Estimated course time + practice buffer</div></div>
+    <div class="card span-3"><h3>Pace needed</h3><div class="kpi" id="paceKpi">—</div><div class="muted small" id="paceSub">Based on your deadline</div></div>
+    <div class="card span-12"><h2>Module checklist</h2><div class="muted" style="margin-bottom:10px">Tick topics and practice sets as you finish them. Notes are saved locally in this browser.</div><div style="overflow:auto"><table id="trackerTable"></table></div></div>
+  </div>
+</section>
+<section id="structure" class="page">
+  <div class="card"><h2>Course structure and estimated dedication</h2><p class="muted">Modules are grouped by topic and mapped to the four DEA-C01 exam domains (D1 Ingestion &amp; Transformation 34%, D2 Data Store Management 26%, D3 Operations &amp; Support 22%, D4 Security &amp; Governance 18%). Topic times are <b>estimates</b>: the course lists 24h 34m in total, and that total is split here by approximate topic weight. Edit the <code>modules</code> array in this file to match your Udemy curriculum. Estimated dedication adds review time and the configurable practice buffer.</p><div style="overflow:auto"><table id="structureTable"></table></div></div>
+</section>
+<section id="resources" class="page">
+  <div class="card"><h2>Curated resources by module</h2><p class="muted">Official AWS documentation for each module. Use them to close gaps the course or practice questions expose.</p><div style="overflow:auto"><table id="resourcesTable"></table></div></div>
+</section>
+<div class="footer">Progress is saved in this browser (localStorage). Export a JSON backup to move it to another device.</div>
+</main>
+<script>
+// lessons: [topic, estimated minutes]
+const modules = [
+{n:1,title:'Introduction & Exam Setup',domain:'All',priority:'high',lessons:[['Course introduction',15],['Exam format, domains & strategy',20]],assignment:'Read the DEA-C01 exam guide and start an error log',resource:['Official DEA-C01 exam guide','https://docs.aws.amazon.com/aws-certification/latest/data-engineer-associate-01/data-engineer-associate-01.html','Source of truth for domains, weights, task statements, and in-scope services.']},
+{n:2,title:'Data Engineering Fundamentals',domain:'D1/D2',priority:'high',lessons:[['Data types, properties & the 3 Vs',20],['Data lakes, warehouses & lakehouses',25],['Data modeling, lineage & schema evolution',25],['File formats: CSV, JSON, Avro, Parquet, ORC',20],['SQL and Git refresher',30]],assignment:'Fundamentals practice questions',resource:['AWS: What is a data lake?','https://aws.amazon.com/what-is/data-lake/','Short overview of lake vs warehouse concepts that frame most exam scenarios.']},
+{n:3,title:'Storage: Amazon S3 and related services',domain:'D2/D4',priority:'high',lessons:[['S3 basics & storage classes',25],['S3 security, bucket policies & encryption',35],['Versioning, replication & lifecycle rules',30],['Event notifications & performance',25],['S3 Tables & Apache Iceberg',20],['EBS, EFS & AWS Backup',15]],assignment:'Storage practice questions',resource:['Amazon S3 User Guide','https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html','Reference for storage classes, lifecycle, versioning, encryption, and event notifications.']},
+{n:4,title:'AWS Glue & Data Catalog',domain:'D1/D2',priority:'high',lessons:[['Glue overview & Data Catalog',25],['Crawlers, partitions & Hive metastore',25],['Glue ETL jobs, Studio & job bookmarks',30],['Glue Data Quality & DataBrew',30],['Glue workflows & triggers',20]],assignment:'Glue practice questions',resource:['AWS Glue Developer Guide','https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html','Covers the Data Catalog, crawlers, ETL jobs, bookmarks, and data quality rules.']},
+{n:5,title:'Amazon Athena',domain:'D2/D3',priority:'high',lessons:[['Athena fundamentals',25],['Performance & cost: partitions, formats, projection',25],['Athena for Spark & federated queries',20]],assignment:'Athena practice questions',resource:['Optimize Athena performance','https://docs.aws.amazon.com/athena/latest/ug/performance-tuning.html','Columnar formats, partitioning, bucketing, partition projection, and S3 throttling.']},
+{n:6,title:'Kinesis Data Streams',domain:'D1',priority:'high',lessons:[['Streams overview & capacity modes',30],['Producers: SDK, KPL, Kinesis Agent',25],['Consumers: KCL, Lambda, enhanced fan-out',30],['Scaling, hot shards & duplicate records',25],['Kinesis security',10]],assignment:'Kinesis practice questions',resource:['Kinesis Data Streams Developer Guide','https://docs.aws.amazon.com/streams/latest/dev/introduction.html','Shards, capacity modes, producers, consumers, and resharding.']},
+{n:7,title:'Firehose, Managed Flink & MSK',domain:'D1',priority:'high',lessons:[['Amazon Data Firehose: buffering, transforms, destinations',30],['Managed Service for Apache Flink',25],['Amazon MSK & MSK Connect',30]],assignment:'Streaming practice questions',resource:['Amazon Data Firehose Developer Guide','https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html','Delivery streams, buffering hints, Lambda transforms, and format conversion.']},
+{n:8,title:'Amazon EMR & Spark',domain:'D1/D3',priority:'medium',lessons:[['EMR architecture, nodes & storage',30],['Spark on EMR',25],['EMR Serverless & EMR on EKS',20],['Hadoop ecosystem: Hive, Presto/Trino, HBase',15]],assignment:'EMR practice questions',resource:['Amazon EMR Management Guide','https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html','Cluster architecture, node types, storage options, and deployment choices.']},
+{n:9,title:'Lambda & Application Integration',domain:'D1/D3',priority:'high',lessons:[['Lambda for data pipelines',25],['AWS SAM basics',15],['EventBridge rules & schedules',20],['Step Functions state machines',25],['SQS, SNS & dead-letter queues',25],['Amazon MWAA (Airflow)',10]],assignment:'Orchestration practice questions',resource:['AWS Step Functions Developer Guide','https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html','State machines, retries, error handling, and service integrations for pipeline orchestration.']},
+{n:10,title:'Amazon Redshift',domain:'D2/D3/D4',priority:'high',lessons:[['Architecture, RA3 & Redshift Serverless',35],['Loading: COPY, UNLOAD & auto-copy',25],['Distribution styles & sort keys',25],['Spectrum, federated queries & data sharing',25],['Materialized views, WLM & maintenance',15],['Redshift security',15]],assignment:'Redshift practice questions',resource:['Amazon Redshift best practices','https://docs.aws.amazon.com/redshift/latest/dg/best-practices.html','Table design, data loading, and query design guidance.']},
+{n:11,title:'DynamoDB & Other Databases',domain:'D2',priority:'medium',lessons:[['DynamoDB keys, capacity & indexes',40],['DynamoDB Streams, TTL & DAX',25],['RDS & Aurora for data engineers',20],['DocumentDB, Keyspaces, MemoryDB & Neptune',20]],assignment:'Database practice questions',resource:['DynamoDB best practices','https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html','Partition keys, sort keys, secondary indexes, and query vs scan.']},
+{n:12,title:'Migration & Transfer',domain:'D1/D2',priority:'medium',lessons:[['DMS & Schema Conversion Tool',30],['DataSync & Transfer Family',20],['Snow Family',10]],assignment:'Migration practice questions',resource:['AWS DMS User Guide','https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html','Full load, CDC, replication instances, and source/target endpoints.']},
+{n:13,title:'Containers',domain:'D1',priority:'low',lessons:[['ECS, EKS & ECR overview',25]],assignment:null,resource:['Amazon ECS Developer Guide','https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html','Enough to know when containerised processing is the right answer.']},
+{n:14,title:'Security, Identity & Compliance',domain:'D4',priority:'high',lessons:[['IAM: policies, roles & least privilege',35],['KMS & encryption patterns',25],['Secrets Manager',10],['Macie & PII detection',10],['Lake Formation permissions',30],['VPC endpoints & PrivateLink',15]],assignment:'Security practice questions',resource:['AWS Lake Formation Developer Guide','https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html','Fine-grained table, column, and row permissions on the data lake.']},
+{n:15,title:'Management & Governance',domain:'D3/D4',priority:'medium',lessons:[['CloudWatch metrics, alarms & Logs',25],['CloudTrail & CloudTrail Lake',20],['AWS Config',10],['CloudFormation & CDK basics',15]],assignment:'Operations practice questions',resource:['Amazon CloudWatch User Guide','https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html','Metrics, alarms, and logs for monitoring pipelines.']},
+{n:16,title:'Machine Learning, GenAI & Vectors',domain:'D2',priority:'low',lessons:[['SageMaker & Bedrock overview',20],['Vector stores & indexing concepts',10]],assignment:null,resource:['Amazon Bedrock Knowledge Bases','https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html','RAG and vector store concepts. ML training itself is out of scope for the exam.']},
+{n:17,title:'Practice Exams & Final Review',domain:'All',priority:'high',lessons:[['Practice exam 1 (timed)',130],['Practice exam 2 (timed)',130],['Practice exam 3 (timed)',130],['Final error-log and cheat-sheet review',60]],assignment:'Score 80% or higher on two full practice exams',resource:['AWS Certification: DEA-C01 exam page','https://aws.amazon.com/certification/certified-data-engineer-associate/','Exam logistics and links to the Official Practice Question Set and Official Practice Exam.']}
+];
+const key='aws_dea_course_tracker_v1';
+const state=JSON.parse(localStorage.getItem(key)||'{}');
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function save(){localStorage.setItem(key,JSON.stringify(state));render();}
+function mins(m){return m.lessons.reduce((a,b)=>a+b[1],0)}
+function h(m){return (mins(m)/60).toFixed(1)}
+function id(m,i){return `m${m.n}_l${i}`}
+function aid(m){return `m${m.n}_a`}
+function noteid(m){return `m${m.n}_note`}
+function lessonCount(){return modules.reduce((a,m)=>a+m.lessons.length,0)}
+function assignmentCount(){return modules.filter(m=>m.assignment).length}
+function tags(m){return `<span class="tag dom">${m.domain}</span><span class="tag p-${m.priority}">${m.priority}</span>`}
+function render(){
+ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.page').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.page).classList.add('active')});
+ const hw=parseFloat(document.getElementById('homeworkHours').value||1); const days=parseFloat(document.getElementById('daysPerWeek').value||6);
+ const doneLessons=modules.reduce((a,m)=>a+m.lessons.filter((_,i)=>state[id(m,i)]).length,0); const totalLessons=lessonCount();
+ const doneAssign=modules.reduce((a,m)=>a+(m.assignment&&state[aid(m)]?1:0),0); const totalAssign=assignmentCount();
+ const doneMins=modules.reduce((a,m)=>a+m.lessons.reduce((s,l,i)=>s+(state[id(m,i)]?l[1]:0),0),0);
+ const totalHours=modules.reduce((a,m)=>a+mins(m)/60,0); const workload=totalHours + totalAssign*hw; const remaining=(totalHours-doneMins/60)+(totalAssign-doneAssign)*hw;
+ const deadline=new Date(document.getElementById('deadline').value+'T23:59:59'); const now=new Date(); const weeks=Math.max((deadline-now)/(1000*60*60*24*7),0.01); const perWeek=remaining/weeks; const perDay=perWeek/days;
+ document.getElementById('lessonKpi').textContent=`${doneLessons} / ${totalLessons}`; document.getElementById('lessonBar').style.width=(doneLessons/totalLessons*100)+'%';
+ document.getElementById('assignKpi').textContent=`${doneAssign} / ${totalAssign}`; document.getElementById('assignBar').style.width=(doneAssign/totalAssign*100)+'%';
+ document.getElementById('workloadKpi').textContent=`${workload.toFixed(1)}h`; document.getElementById('paceKpi').textContent=`${perWeek.toFixed(1)}h/wk`; document.getElementById('paceSub').textContent=`≈ ${perDay.toFixed(1)}h per study day · ${remaining.toFixed(1)}h remaining`;
+ document.getElementById('trackerTable').innerHTML='<tr><th>Done</th><th>Module / topic</th><th class="right">Time (est.)</th><th>Practice set</th><th>Notes</th></tr>'+modules.map(m=>{
+   const lessonRows=m.lessons.map((l,i)=>`<label><input type="checkbox" ${state[id(m,i)]?'checked':''} onchange="state['${id(m,i)}']=this.checked;save()"> <span class="${state[id(m,i)]?'lesson-done':''}">${l[0]}</span> <span class="tag">${l[1]}m</span></label>`).join('<br>');
+   return `<tr><td>${Math.round(m.lessons.filter((_,i)=>state[id(m,i)]).length/m.lessons.length*100)}%</td><td><div class="module-title">${m.n}. ${m.title} ${tags(m)}</div><div class="small">${lessonRows}</div></td><td class="right">${h(m)}h</td><td>${m.assignment?`<label><input type="checkbox" ${state[aid(m)]?'checked':''} onchange="state['${aid(m)}']=this.checked;save()"> ${m.assignment}</label>`:'<span class="muted">Skim only, no practice set</span>'}</td><td><textarea placeholder="Notes / weak spots / links" oninput="state['${noteid(m)}']=this.value;localStorage.setItem(key,JSON.stringify(state))">${esc(state[noteid(m)]||'')}</textarea></td></tr>`}).join('');
+ document.getElementById('structureTable').innerHTML='<tr><th>#</th><th>Module</th><th>Domain / priority</th><th>Topics</th><th>Time (est.)</th><th>Practice set</th><th>Suggested total dedication</th></tr>'+modules.map(m=>`<tr><td>${m.n}</td><td><b>${m.title}</b></td><td>${tags(m)}</td><td>${m.lessons.map(l=>`<span class="tag">${l[0]} · ${l[1]}m</span>`).join(' ')}</td><td>${h(m)}h</td><td>${m.assignment||'—'}</td><td><b>${(mins(m)/60+(m.assignment?hw:0)+Math.max(0.5,mins(m)/180)).toFixed(1)}h</b><br><span class="muted small">Course time + ${m.assignment?hw+'h practice + ':''}review</span></td></tr>`).join('');
+ document.getElementById('resourcesTable').innerHTML='<tr><th>Module</th><th>Best resource</th><th>Why / how to use it</th><th>Suggested use</th></tr>'+modules.map(m=>`<tr class="resource"><td><b>${m.n}. ${m.title}</b></td><td><a href="${m.resource[1]}" target="_blank" rel="noopener">${m.resource[0]}</a></td><td>${m.resource[2]}</td><td>Skim before the module for context, then return to it for any question you got wrong.</td></tr>`).join('');
+}
+document.getElementById('deadline').onchange=render; document.getElementById('daysPerWeek').oninput=render; document.getElementById('homeworkHours').oninput=render;
+document.getElementById('resetBtn').onclick=()=>{if(confirm('Reset all saved progress?')){localStorage.removeItem(key);location.reload();}};
+function setJsonStatus(message, ok=true){
+ const el=document.getElementById('jsonStatus');
+ el.textContent=message;
+ el.className=ok?'small ok':'small warning';
+}
+function currentSettings(){
+ return {
+   deadline: document.getElementById('deadline').value,
+   daysPerWeek: document.getElementById('daysPerWeek').value,
+   homeworkHours: document.getElementById('homeworkHours').value
+ };
+}
+function applySettings(settings={}){
+ if(settings.deadline) document.getElementById('deadline').value=settings.deadline;
+ if(settings.daysPerWeek) document.getElementById('daysPerWeek').value=settings.daysPerWeek;
+ if(settings.homeworkHours) document.getElementById('homeworkHours').value=settings.homeworkHours;
+}
+document.getElementById('exportBtn').onclick=()=>{
+ const payload={
+   app:'aws-dea-course-tracker',
+   version:1,
+   exportedAt:new Date().toISOString(),
+   settings:currentSettings(),
+   state
+ };
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download=`aws-dea-course-progress-${new Date().toISOString().slice(0,10)}.json`;
+ document.body.appendChild(a);
+ a.click();
+ a.remove();
+ URL.revokeObjectURL(a.href);
+ setJsonStatus('Progress exported as JSON.');
+};
+document.getElementById('importBtn').onclick=()=>document.getElementById('fileInput').click();
+document.getElementById('fileInput').onchange=e=>{
+ const f=e.target.files[0];
+ if(!f)return;
+ const r=new FileReader();
+ r.onload=()=>{
+   try{
+     const parsed=JSON.parse(r.result);
+     const importedState=parsed.state && typeof parsed.state==='object' ? parsed.state : parsed;
+     if(!importedState || typeof importedState!=='object') throw new Error('Missing tracker state');
+     Object.keys(state).forEach(k=>delete state[k]);
+     Object.assign(state,importedState);
+     if(parsed.settings) applySettings(parsed.settings);
+     localStorage.setItem(key,JSON.stringify(state));
+     render();
+     setJsonStatus(`Imported ${f.name} successfully.`);
+   }catch(err){
+     setJsonStatus('Import failed: invalid JSON tracker file.', false);
+   }finally{
+     e.target.value='';
+   }
+ };
+ r.onerror=()=>setJsonStatus('Import failed: could not read the file.', false);
+ r.readAsText(f);
+};
+render();
+</script>
+</body>
+</html>
