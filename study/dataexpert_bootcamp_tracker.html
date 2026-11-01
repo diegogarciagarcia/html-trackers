@@ -22,6 +22,38 @@
   .back-nav .back-link:hover { text-decoration: underline; }
   @media print { .back-nav { display: none; } }
 </style>
+<style>
+/* mobile-optimizations */
+@media (max-width:700px){
+ header .wrap{padding:10px 14px}
+ header h1{font-size:1.2rem;margin:0}
+ header .topline>div>.muted,header .pill{display:none}
+ header nav{margin-top:8px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:6px;padding-bottom:2px}
+ header .tab{flex:none;white-space:nowrap;padding:9px 12px}
+ .back-nav{padding:0 14px}.back-nav .back-link{display:inline-block;padding:12px 0}
+ main{padding:12px}.grid{gap:10px}.card{padding:14px;border-radius:14px}
+ .span-3{grid-column:span 6}.kpi{font-size:1.35rem}
+ input,select,textarea{font-size:16px}
+ input[type="checkbox"]{width:26px;height:26px;flex:none}
+ td label{display:flex;gap:10px;align-items:flex-start;padding:7px 0}
+ .controls>label{flex:1 1 100%;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+ .controls .btn{flex:1 1 auto}
+ #lectureFilter{min-width:0!important;width:100%}
+ #udemyTable th:nth-child(4),#udemyTable td:nth-child(4){display:none}
+ #udemyTable th,#udemyTable td{padding:8px 6px}
+ table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
+ table.stack{border:0;background:transparent}
+ table.stack tr.thead-row{display:none}
+ table.stack tr{border:1px solid var(--line);border-radius:12px;padding:6px 10px;margin:0 0 10px;background:var(--card,#fff)}
+ table.stack td{border:0;padding:5px 0;text-align:left}
+ table.stack td[data-label]::before{content:attr(data-label);display:block;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:2px}
+ table.stack tr:hover td{background:transparent}
+ #trackerTable tr:not(.thead-row){display:flex;flex-wrap:wrap;column-gap:18px}
+ #trackerTable td:nth-child(1),#trackerTable td:nth-child(3){width:auto;order:-1}
+ #trackerTable td:nth-child(1)::before,#trackerTable td:nth-child(3)::before{display:inline;margin-right:6px}
+ #trackerTable td:nth-child(2)::before{display:none}
+}
+</style>
 </head>
 <body>
 <nav class="back-nav" aria-label="Site navigation">
@@ -173,6 +205,21 @@ document.getElementById('fileInput').onchange=e=>{
  r.readAsText(f);
 };
 render();
+</script>
+<script>/* mobile-optimizations: label table cells so they can stack as cards on phones */
+(function(){
+ function label(){document.querySelectorAll('table').forEach(function(t){
+  if(t.id==='udemyTable')return;
+  var head=t.querySelector('tr'); if(!head||!head.querySelector('th'))return;
+  t.classList.add('stack'); head.classList.add('thead-row');
+  var h=[].map.call(head.children,function(c){return c.textContent.trim()});
+  t.querySelectorAll('tr').forEach(function(r){if(r===head||r.children.length!==h.length)return;
+   [].forEach.call(r.children,function(c,i){if(c.tagName==='TD'&&h[i]&&c.dataset.label!==h[i])c.dataset.label=h[i]});});
+ });}
+ var queued=false;
+ new MutationObserver(function(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;label()})}).observe(document.body,{childList:true,subtree:true});
+ label();
+})();
 </script>
 </body>
 </html>

@@ -95,8 +95,9 @@ def build_gallery(rel_dir, image_paths):
       border-radius:24px; padding:32px; margin-bottom:28px; box-shadow:var(--shadow); text-align:center; }}
     header h1 {{ font-size:30px; letter-spacing:-.04em; margin-bottom:4px; }}
     header p {{ color:#dbeafe; font-size:15px; }}
-    .back {{ display:inline-block; margin-bottom:18px; color:var(--accent); text-decoration:none;
+    .back {{ display:inline-block; margin-bottom:8px; padding:12px 0; color:var(--accent); text-decoration:none;
       font-weight:600; font-size:14px; }}
+    @media (max-width:640px) {{ .app {{ padding:14px; }} header {{ padding:22px 16px; border-radius:18px; }} }}
     .back:hover {{ text-decoration:underline; }}
     .grid {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }}
     @media (max-width:640px) {{ .grid {{ grid-template-columns:repeat(2,1fr); gap:10px; }} }}
@@ -359,8 +360,18 @@ def build():
     .link-card:hover {{ transform:translateY(-3px); box-shadow:0 14px 36px rgba(15,23,42,.13); }}
     .card-title {{ font-size:17px; font-weight:700; }}
     .card-path {{ font-size:12px; color:var(--muted); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }}
+    .link-card {{ min-width:0; }}
+    .card-path {{ overflow-wrap:anywhere; }}
     .link-card.pinned {{ border:2px solid var(--accent); padding:26px 22px; }}
     .link-card.pinned .card-title {{ font-size:20px; }}
+    @media (max-width:640px) {{
+      .app {{ padding:14px; }}
+      header {{ padding:22px 16px; border-radius:18px; margin-bottom:18px; }}
+      header h1 {{ font-size:26px; }}
+      .grid {{ gap:12px; }}
+      .link-card {{ padding:18px; }}
+      .link-card.pinned {{ padding:20px 18px; }}
+    }}
     .empty {{ color:var(--muted); text-align:center; padding:40px; }}
     footer {{ text-align:center; color:var(--muted); font-size:12px; margin-top:36px; }}
   </style>
