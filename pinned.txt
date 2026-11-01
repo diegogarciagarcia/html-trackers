@@ -1,0 +1,8 @@
+# Pages shown in the "Pinned" section at the top of the index.
+# One page per line: <path relative to repo root> | <optional display name>
+# Lines starting with # are ignored. Pinned pages still appear in their normal folder group.
+
+travel/new_orleans_trip_plan.html | New Orleans trip plan
+travel/new_orleans_shopping_souvenirs.html | New Orleans shopping & souvenirs
+study/aws_dea_udemy_tracker.html | AWS DEA-C01 Udemy tracker
+study/aws_dea_course_tracker.html | AWS DEA-C01 course tracker (v1)

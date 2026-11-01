@@ -7,16 +7,13 @@ Runs in CI on every push. New HTML files and image folders appear automatically.
 import os
 import html
 import datetime
-import base64
-import struct
-import zlib
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Files/dirs to skip when listing links.
 SKIP_FILES = {"index.html"}
 SKIP_NAMES = {"test.html"}
-SKIP_DIRS = {".git", ".github", "functions", "node_modules", "old"}
+SKIP_DIRS = {".git", ".github", "functions", "node_modules", "old", "assets"}
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"}
 GENERATED_GALLERY_SUFFIX = "_gallery.html"
@@ -231,6 +228,27 @@ def group_label(rel):
     return parts[0] if len(parts) > 1 else "Root"
 
 
+PINNED_FILE = os.path.join(ROOT, "pinned.txt")
+
+
+def read_pinned(available):
+    """Return [(rel_path, label)] from pinned.txt, keeping only pages that exist."""
+    if not os.path.exists(PINNED_FILE):
+        return []
+    pinned = []
+    with open(PINNED_FILE) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            rel, _, label = (part.strip() for part in line.partition("|"))
+            if rel not in available:
+                print(f"  WARNING: pinned page not found, skipping: {rel}")
+                continue
+            pinned.append((rel, label or title_from(rel)))
+    return pinned
+
+
 # ---------------------------------------------------------------------------
 # Index builder
 # ---------------------------------------------------------------------------
@@ -260,6 +278,18 @@ def build():
 
     # --- Step 4: build the index ---
     cards_html = []
+    pinned = read_pinned(set(files) | set(gallery_files))
+    if pinned:
+        cards_html.append('    <div class="section-label">📌 Pinned</div>')
+        cards_html.append('    <div class="grid">')
+        for rel, label in pinned:
+            cards_html.append(
+                f'      <a class="link-card pinned" href="{html.escape(rel)}">\n'
+                f'        <span class="card-title">{html.escape(label)}</span>\n'
+                f'        <span class="card-path">{html.escape(rel)}</span>\n'
+                f'      </a>'
+            )
+        cards_html.append('    </div>')
     for grp in sorted(groups, key=lambda g: (g == "Root", "📷" in g, g.lower())):
         label = html.escape(grp.replace("_", " ").title() if grp not in ("Root", "📷 Galleries") else grp)
         if label == "Root":
@@ -295,6 +325,14 @@ def build():
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My HTML Pages</title>
+  <!-- Home-screen app support (iPhone "Add to Home Screen", Android install) -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Trackers" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="theme-color" content="#1d4ed8" />
   <style>
     :root {{
       --bg:#f5f7fb; --card:#fff; --text:#172033; --muted:#667085;
@@ -321,6 +359,8 @@ def build():
     .link-card:hover {{ transform:translateY(-3px); box-shadow:0 14px 36px rgba(15,23,42,.13); }}
     .card-title {{ font-size:17px; font-weight:700; }}
     .card-path {{ font-size:12px; color:var(--muted); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }}
+    .link-card.pinned {{ border:2px solid var(--accent); padding:26px 22px; }}
+    .link-card.pinned .card-title {{ font-size:20px; }}
     .empty {{ color:var(--muted); text-align:center; padding:40px; }}
     footer {{ text-align:center; color:var(--muted); font-size:12px; margin-top:36px; }}
   </style>

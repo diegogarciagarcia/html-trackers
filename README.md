@@ -9,6 +9,9 @@ Personal study, fitness, and travel trackers — standalone HTML files deployed 
 ├── .github/workflows/pages.yml          CI: rebuild index → deploy to GitHub Pages
 ├── .nojekyll                            Tells GitHub Pages to skip Jekyll processing
 ├── build_index.py                       Generates index.html + gallery pages on every push
+├── pinned.txt                           Pages shown in the "Pinned" section at the top of the index
+├── manifest.webmanifest                 Home-screen app settings for the index
+├── assets/icons/                        Home-screen icons (excluded from galleries)
 ├── study/
 │   ├── aws_dea_fast_track_tracker.html  AWS Data Engineer Associate (DEA-C01), 21-day plan
 │   ├── aws_dea_course_tracker.html      DEA-C01 course tracker, first version (estimated times)
@@ -50,6 +53,17 @@ Drop images into any folder (e.g. `photos/`, `travel/pics/`) and push. The build
 - Auto-linked from the index under a "📷 Galleries" section
 
 Gallery pages are generated at build time and gitignored — only the source images are committed.
+
+### Pinned pages
+
+List pages in `pinned.txt` (one per line, `path | display name`) to show them as large cards at the top of the index. They also stay in their normal folder group. Paths that don't exist are skipped with a warning in the build log.
+
+### iPhone home screen
+
+- **Whole site:** open the index in Safari → Share → **Add to Home Screen**. It installs as "Trackers".
+- **Single page:** open a pinned page and do the same. The travel pages (teal icon) and DEA trackers (orange icon) have their own icons and short names.
+
+iOS keeps separate storage for each home-screen app and for Safari, so tracker progress doesn't carry over between them. Use one entry point per tracker, or move progress with Export / Import JSON.
 
 ## Deployment
 
